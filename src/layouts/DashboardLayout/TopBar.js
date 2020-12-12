@@ -65,7 +65,7 @@ const TopBar = ({
   ...rest
 }) => {
   const classes = useStyles();
-  const [notifications] = useState([]);
+  // const [notifications] = useState([]);
   const navigate = useNavigate();
   console.log(data);
 

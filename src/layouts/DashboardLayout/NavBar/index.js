@@ -58,11 +58,8 @@ const NavBar = ({ onMobileClose, openMobile, user }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
-  // console.log(user);
-  if (! 'userName' in user) {
-    user['userName'] = ''
-    console.log('fadhfkjahkagudhkajd')
-  }
+
+
 
   const content = (
     <Box
