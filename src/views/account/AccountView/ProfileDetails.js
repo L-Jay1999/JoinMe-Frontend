@@ -33,7 +33,7 @@ const ProfileDetails = ({ className, ...rest }) => {
     'phoneNumber': '',
     'cardNumber': '',
     'introduction': ''
-});
+  });
   const [password, setPassword] = useState('')
 
   useEffect(() => {
@@ -41,13 +41,14 @@ const ProfileDetails = ({ className, ...rest }) => {
       method: 'get',
       credentials: "include",
     }).then(res => res.json())
-      .then(data => { 
+      .then(data => {
         console.log(data);
         console.log(data.data);
-        if (data.code === 10000) 
+        if (data.code === 10000)
           setValues(data.data);
         else
-          navigate('/login', { replace: true });  });
+          navigate('/login', { replace: true });
+      });
   }, []);
 
   const handleChange = (event) => {
@@ -79,7 +80,7 @@ const ProfileDetails = ({ className, ...rest }) => {
               md={4}
               xs={12}
             >
-            <TextField
+              <TextField
                 disabled
                 fullWidth
                 label="用户名"
@@ -95,7 +96,7 @@ const ProfileDetails = ({ className, ...rest }) => {
               md={4}
               xs={12}
             >
-            <TextField
+              <TextField
                 fullWidth
                 disabled
                 label="姓名"
@@ -195,7 +196,8 @@ const ProfileDetails = ({ className, ...rest }) => {
           <Button
             color="primary"
             variant="contained"
-            onClick={() => { 
+            onClick={() => {
+              values['password'] = password;
               fetch('http://localhost:8080/user/', {
                 method: 'post',
                 credentials: "include",
@@ -204,14 +206,15 @@ const ProfileDetails = ({ className, ...rest }) => {
                   'Content-Type': 'application/json'
                 },
               }).then(res => res.json())
-                .then(data => { 
+                .then(data => {
                   console.log(data);
                   console.log(data.data);
-                  if (data.code !== 10000) 
+                  if (data.code !== 10000)
                     alert('更新失败');
                   else
                     alert('更新成功')
-                })}}
+                })
+            }}
           >
             保存信息
           </Button>

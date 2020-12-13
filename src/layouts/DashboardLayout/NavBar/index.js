@@ -25,6 +25,16 @@ const items = [
     title: '查看召集令'
   },
   {
+    href: '/app/myorders',
+    icon: ShoppingBagIcon,
+    title: '查看我的召集令'
+  },
+  {
+    href: '/app/myrequests',
+    icon: ShoppingBagIcon,
+    title: '查看我的请求'
+  },
+  {
     href: '/app/account',
     icon: UserIcon,
     title: '用户信息'
@@ -140,7 +150,7 @@ NavBar.propTypes = {
 };
 
 NavBar.defaultProps = {
-  onMobileClose: () => {},
+  onMobileClose: () => { },
   openMobile: false
 };
 
