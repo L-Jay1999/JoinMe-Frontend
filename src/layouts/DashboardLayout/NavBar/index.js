@@ -27,6 +27,16 @@ const items = [
     title: '查看召集令'
   },
   {
+    href: '/app/myorders',
+    icon: ShoppingBagIcon,
+    title: '查看我的召集令'
+  },
+  {
+    href: '/app/myrequests',
+    icon: ShoppingBagIcon,
+    title: '查看我的请求'
+  },
+  {
     href: '/app/account',
     icon: UserIcon,
     title: '用户信息'
@@ -37,7 +47,7 @@ const items = [
     title: '明细表',
   },
   {
-    href: '/app/details',
+    href: '/app/income',
     icon: ChartIcon,
     title: '收益汇总表',
   }
@@ -152,7 +162,7 @@ NavBar.propTypes = {
 };
 
 NavBar.defaultProps = {
-  onMobileClose: () => {},
+  onMobileClose: () => { },
   openMobile: false
 };
 

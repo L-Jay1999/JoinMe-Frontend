@@ -21,7 +21,7 @@ import {
   InputLabel
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-
+import LineChart from './LineChart';
 import cityData from '../city.json';
 
 const useStyles = makeStyles((theme) => ({
@@ -65,11 +65,16 @@ const IncomeList = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [details, setDetails] = useState([]);
-  const [selectedCity, setSelectedCity] = React.useState('');
-  const [orderType, setOrderType] = React.useState('');
-  const [startDate, setStartDate] = React.useState("2020-01-01");
-  const [endDate, setEndDate] = React.useState(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
-  const [isType, setIsType] = React.useState(true);
+  const [selectedCity, setSelectedCity] = useState('');
+  const [orderType, setOrderType] = useState('');
+  const [startDate, setStartDate] = useState("2020-01-01");
+  const [endDate, setEndDate] = useState(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
+  const [isType, setIsType] = useState(true);
+  const [chartData, setChartData] = useState({x:[],y:[]});
+  //  const chartData = {
+  //   x: ['2019-11-21', '2019-11-22', '2019-11-23', '2019-11-24', '2019-11-25', '2019-11-26'],
+  //   y: [20, 50, 80, 70, 45, 85]
+  // };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -134,6 +139,7 @@ const IncomeList = () => {
       className={classes.root}
       title="Details"
     >
+      <LineChart data={ chartData} />
       <Container maxWidth={false}>
         <Box
           display="flex"
