@@ -65,7 +65,7 @@ const ProductList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:8080/order/', {
+    fetch('http://52.250.51.146:8080/order/', {
       method: 'get'
     }).then(res => res.json())
       .then(data => { setOrder(data.data); });

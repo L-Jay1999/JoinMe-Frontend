@@ -52,7 +52,7 @@ const LoginView = () => {
               console.log(values.username);
               formData.append('username', values.username);
               formData.append('password', values.password);
-              fetch('http://localhost:8080/login', {
+              fetch('http://52.250.51.146:8080/login', {
                 method: 'post',
                 body: formData,
                 credentials: "include",

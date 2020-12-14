@@ -37,7 +37,7 @@ const ProfileDetails = ({ className, ...rest }) => {
   const [password, setPassword] = useState('')
 
   useEffect(() => {
-    fetch('http://localhost:8080/user/', {
+    fetch('http://52.250.51.146:8080/user/', {
       method: 'get',
       credentials: "include",
     }).then(res => res.json())
@@ -196,7 +196,7 @@ const ProfileDetails = ({ className, ...rest }) => {
             color="primary"
             variant="contained"
             onClick={() => { 
-              fetch('http://localhost:8080/user/', {
+              fetch('http://52.250.51.146:8080/user/', {
                 method: 'post',
                 credentials: "include",
                 body: JSON.stringify(values),

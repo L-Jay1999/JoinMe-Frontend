@@ -15,6 +15,8 @@ import {
 import {
   ShoppingBag as ShoppingBagIcon,
   User as UserIcon,
+  Map as MapIcon,
+  BarChart as ChartIcon,
 } from 'react-feather';
 import NavItem from './NavItem';
 
@@ -28,6 +30,16 @@ const items = [
     href: '/app/account',
     icon: UserIcon,
     title: '用户信息'
+  },
+  {
+    href: '/app/details',
+    icon: MapIcon,
+    title: '明细表',
+  },
+  {
+    href: '/app/details',
+    icon: ChartIcon,
+    title: '收益汇总表',
   }
 ];
 

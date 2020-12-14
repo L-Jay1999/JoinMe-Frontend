@@ -78,7 +78,7 @@ const RegisterView = () => {
             onSubmit={(values) => {
               values.cardType = values.cardType === '身份证'? 'Identity': 'Passport';
               console.log(values);
-              fetch('http://localhost:8080/user/create', {
+              fetch('http://52.250.51.146:8080/user/create', {
                 method: 'post',
                 credentials: "include",
                 body: JSON.stringify(values),

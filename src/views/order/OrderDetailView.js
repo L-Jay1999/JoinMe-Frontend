@@ -72,7 +72,7 @@ const OrderDetailView = () => {
   const [userId, setUserId] = useState(-1);
 
   useEffect(() => {
-    fetch('http://localhost:8080/order/' + id + '/request', {
+    fetch('http://52.250.51.146:8080/order/' + id + '/request', {
       method: 'get',
       credentials: "include",
     }).then(res => res.json()).then(res => {
@@ -82,7 +82,7 @@ const OrderDetailView = () => {
       console.log(permission);
     });
 
-    fetch('http://localhost:8080/order/' + id, {
+    fetch('http://52.250.51.146:8080/order/' + id, {
       method: 'get',
       credentials: "include",
     }).then(res => res.json())
@@ -96,7 +96,7 @@ const OrderDetailView = () => {
           navigate('/login', { replace: true });
       });
 
-    fetch('http://localhost:8080/user/', {
+    fetch('http://52.250.51.146:8080/user/', {
       method: 'get',
       credentials: "include",
     }).then(res => res.json())
