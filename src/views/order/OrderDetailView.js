@@ -143,17 +143,6 @@ const OrderDetailView = () => {
                   image="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1812993978,4158651947&fm=26&gp=0.jpg"
                   title="Contemplative Reptile"
                 />
-                <Button
-                  variant="contained"
-                  component="label"
-                  align="center"
-                >
-                  Upload File
-                  <input
-                    type="file"
-                    style={{ display: "none" }}
-                  />
-                </Button>
               </Grid>
               <Grid
                 item
