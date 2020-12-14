@@ -122,41 +122,72 @@ const ProductList = () => {
                                         return null;
                                     console.log(row.orderName);
                                     return (
-                                        columns.map((column) => {
-                                            const value = row[column.id];
-                                            if (column.id === 'orderState')
-                                                return (
-                                                    <TableCell key={column.id} align={column.align}>
-                                                        <OrderState status={value} />
-                                                    </TableCell>
-                                                )
-                                            else if (column.id === 'orderType')
-                                                return (
-                                                    <TableCell key={column.id} align={column.align}>
-                                                        {ordertypes[value]}
-                                                    </TableCell>
-                                                )
-                                            else if (column.id === 'operation')
-                                                return (
-                                                    <TableCell>
-                                                        <Button color="primary" variant="contained" key={row.orderId} onClick={() => {
-                                                            // window.location.href = '/app/orders/' + row.orderId;
-                                                            navigate('/app/orders/' + row.orderId, { replace: true });
-                                                        }}>
-                                                            查看
-                                                            </Button>
-                                                        <Button color="primary" variant="contained">
-                                                            请求
-                                                            </Button>
-                                                    </TableCell>
-                                                )
-                                            return (
-                                                <TableCell key={column.id} align={column.align}>
-                                                    {column.format && typeof value === 'number' ? column.format(value) : value}
-                                                </TableCell>
-                                            );
-                                        })
+                                        <TableRow tabIndex={-1} >
+                                            {columns.map((column) => {
+                                                const value = row[column.id];
+                                                if (column.id === 'orderState')
+                                                    return (
+                                                        <TableCell key={column.id} align={column.align}>
+                                                            <OrderState status={value} />
+                                                        </TableCell>
+                                                    )
+                                                else if (column.id === 'orderType')
+                                                    return (
+                                                        <TableCell key={column.id} align={column.align}>
+                                                            {ordertypes[value]}
+                                                        </TableCell>
+                                                    )
+                                                else if (column.id === 'operation')
+                                                    return (
+                                                        <TableCell>
+                                                            <Button color="primary" variant="contained" key={row.orderId} onClick={() => {
+                                                                // window.location.href = '/app/orders/' + row.orderId;
+                                                                navigate('/app/orders/' + row.orderId, { replace: true });
+                                                            }}>
+                                                                查看
+                                                                </Button>
+                                                            <Button color="primary" variant="contained">
+                                                                请求
+                                                                </Button>
+                                                            <Button variant="contained" color="secondary" key={row.orderId} onClick={() => {
+                                                                fetch('http://localhost:8080/order/' + row.orderId, {
+                                                                    method: 'delete',
+                                                                    credentials: "include",
+                                                                }
+                                                                ).then(res => res.json())
+                                                                    .then(data => {
+                                                                        if (data.code !== 10000)
+                                                                            alert('删除失败')
+                                                                        else {
+                                                                            alert('删除成功')
+                                                                            fetch('http://localhost:8080/order/issued', {
+                                                                                method: 'get',
+                                                                                credentials: "include"
+                                                                            }).then(res => res.json())
+                                                                                .then(data => {
+                                                                                    console.log(data.code);
+                                                                                    console.log(data.data);
+                                                                                    if (data.code === 10000)
+                                                                                        setOrder(data.data);
+                                                                                    else if (data.code === 10004)
+                                                                                        navigate('/login', { replace: true });
+                                                                                });
+                                                                        }
+                                                                    })
+                                                            }}>
+                                                                取消
+                                                                </Button>
 
+                                                        </TableCell>
+                                                    )
+                                                else
+                                                    return (
+                                                        <TableCell key={column.id} align={column.align}>
+                                                            {column.format && typeof value === 'number' ? column.format(value) : value}
+                                                        </TableCell>
+                                                    );
+                                            })}
+                                        </TableRow>
                                     );
                                 })}
                             </TableBody>
