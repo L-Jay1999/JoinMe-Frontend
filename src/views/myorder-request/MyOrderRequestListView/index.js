@@ -11,7 +11,8 @@ import {
     TablePagination,
     Container,
     Chip,
-    makeStyles
+    makeStyles,
+    Button
 } from '@material-ui/core';
 import Page from 'src/components/Page';
 import Toolbar from './Toolbar';
@@ -33,7 +34,8 @@ const columns = [
     { id: 'userId', label: '用户Id' },
     { id: 'description', label: '描述' },
     { id: 'modifyDate', label: '修改时间' },
-    { id: 'requestState', label: '请求状态' }
+    { id: 'requestState', label: '请求状态' },
+    { id: 'operation', label: '操作' }
 ];
 
 const RequestState = (props) => {
@@ -112,12 +114,7 @@ const MyRequestList = () => {
                                         return null;
                                     console.log(row.description);
                                     return (
-                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.orderId}
-                                            onClick={() => {
-                                                // window.location.href = '/app/orders/' + row.orderId;
-                                                navigate('/app/orders/' + row.orderId, { replace: true });
-                                            }}
-                                        >
+                                        <TableRow tabIndex={-1} key={row.orderId}>
                                             {columns.map((column) => {
                                                 const value = row[column.id];
                                                 if (column.id === 'requestState')
@@ -126,6 +123,67 @@ const MyRequestList = () => {
                                                             <RequestState status={value} />
                                                         </TableCell>
                                                     )
+                                                else (column.id === 'operation')
+                                                return (
+                                                    <TableCell>
+                                                        <Button color="primary" variant="contained" key={row.userId} onClick={
+                                                            () => {
+                                                                fetch('http://localhost:8080/' + row.requestId + '/approve', {
+                                                                    method: 'post',
+                                                                    credentials: "include",
+                                                                }
+                                                                ).then(res => res.json())
+                                                                    .then(data => {
+                                                                        if (data.code !== 10000)
+                                                                            alert('同意失败')
+                                                                        else {
+                                                                            alert('同意成功')
+                                                                            fetch('http://localhost:8080/orderid/' + id, {
+                                                                                method: 'get',
+                                                                                credentials: "include"
+                                                                            }).then(res => res.json())
+                                                                                .then(data => {
+                                                                                    if (data.code === 10000)
+                                                                                        setRequest(data.data);
+                                                                                    else if (data.code === 10004)
+                                                                                        navigate('/login', { replace: true });
+                                                                                });
+                                                                        }
+                                                                    })
+                                                            }
+                                                        }>
+                                                            同意
+                                                        </Button>
+                                                        <Button color="secondary" variant="contained" key={row.userId} onClick={
+                                                            () => {
+                                                                fetch('http://localhost:8080/' + row.requestId + '/deny', {
+                                                                    method: 'post',
+                                                                    credentials: "include",
+                                                                }
+                                                                ).then(res => res.json())
+                                                                    .then(data => {
+                                                                        if (data.code !== 10000)
+                                                                            alert('拒绝失败')
+                                                                        else {
+                                                                            alert('拒绝成功')
+                                                                            fetch('http://localhost:8080/orderid/' + id, {
+                                                                                method: 'get',
+                                                                                credentials: "include"
+                                                                            }).then(res => res.json())
+                                                                                .then(data => {
+                                                                                    if (data.code === 10000)
+                                                                                        setRequest(data.data);
+                                                                                    else if (data.code === 10004)
+                                                                                        navigate('/login', { replace: true });
+                                                                                });
+                                                                        }
+                                                                    })
+                                                            }
+                                                        }>
+                                                            拒绝
+                                                        </Button>
+                                                    </TableCell>
+                                                )
                                                 return (
                                                     <TableCell key={column.id} align={column.align}>
                                                         {column.format && typeof value === 'number' ? column.format(value) : value}

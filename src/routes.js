@@ -14,6 +14,7 @@ import IssueOrderView from 'src/views/order/IssueOrderView';
 import AcceptOrderView from 'src/views/order/AcceptOrderView';
 import MyRequestListView from 'src/views/myrequest/MyRequestListView';
 import MyOrderListView from 'src/views/myorder/MyOrderListView';
+import MyOrderRequestListView from 'src/views/myorder-request/MyOrderRequestListView';
 
 
 const routes = [
@@ -30,6 +31,7 @@ const routes = [
       { path: 'issue', element: <IssueOrderView /> },
       { path: 'myrequests', element: <MyRequestListView /> },
       { path: 'myorders', element: <MyOrderListView /> },
+      { path: 'myorderrequest/:id', element: <MyOrderRequestListView /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },
