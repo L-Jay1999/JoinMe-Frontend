@@ -142,7 +142,7 @@ const ProductList = () => {
                                                         <TableCell>
                                                             <Button color="primary" variant="contained" key={row.orderId} onClick={() => {
                                                                 // window.location.href = '/app/orders/' + row.orderId;
-                                                                navigate('/app/orders/' + row.orderId, { replace: true });
+                                                                navigate('/app/updateorder/' + row.orderId, { replace: true });
                                                             }}>
                                                                 查看
                                                                 </Button>
