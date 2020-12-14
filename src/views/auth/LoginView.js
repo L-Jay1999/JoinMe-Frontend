@@ -52,7 +52,7 @@ const LoginView = () => {
               console.log(values.username);
               formData.append('username', values.username);
               formData.append('password', values.password);
-              fetch('http://52.250.51.146:8080/login', {
+              fetch('http://localhost:8080/login', {
                 method: 'post',
                 body: formData,
                 credentials: "include",
@@ -76,75 +76,75 @@ const LoginView = () => {
               touched,
               values
             }) => (
-                <form onSubmit={handleSubmit}>
-                  <Box mb={3}>
-                    <Typography
-                      color="textPrimary"
-                      variant="h2"
-                      align="center"
-                    >
-                      登录
-                  </Typography>
-                  </Box>
-                  <Box
-                    mt={3}
-                    mb={1}
-                  >
-                  </Box>
-                  <TextField
-                    error={Boolean(touched.username && errors.username)}
-                    fullWidth
-                    helperText={touched.username && errors.username}
-                    label="用户名"
-                    margin="normal"
-                    name="username"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    type="text"
-                    value={values.username}
-                    variant="outlined"
-                  />
-                  <TextField
-                    error={Boolean(touched.password && errors.password)}
-                    fullWidth
-                    helperText={touched.password && errors.password}
-                    label="密码"
-                    margin="normal"
-                    name="password"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    type="password"
-                    value={values.password}
-                    variant="outlined"
-                  />
-                  <Box my={2}>
-                    <Button
-                      color="primary"
-                      // disabled={isSubmitting}
-                      fullWidth
-                      size="large"
-                      type="submit"
-                      variant="contained"
-                    >
-                      登录
-                  </Button>
-                  </Box>
+              <form onSubmit={handleSubmit}>
+                <Box mb={3}>
                   <Typography
-                    color="textSecondary"
-                    variant="body1"
+                    color="textPrimary"
+                    variant="h2"
+                    align="center"
                   >
-                    还没有账号？
-                  {' '}
-                    <Link
-                      component={RouterLink}
-                      to="/register"
-                      variant="h6"
-                    >
-                      注册
-                  </Link>
+                    登录
                   </Typography>
-                </form>
-              )}
+                </Box>
+                <Box
+                  mt={3}
+                  mb={1}
+                >
+                </Box>
+                <TextField
+                  error={Boolean(touched.username && errors.username)}
+                  fullWidth
+                  helperText={touched.username && errors.username}
+                  label="用户名"
+                  margin="normal"
+                  name="username"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  type="text"
+                  value={values.username}
+                  variant="outlined"
+                />
+                <TextField
+                  error={Boolean(touched.password && errors.password)}
+                  fullWidth
+                  helperText={touched.password && errors.password}
+                  label="密码"
+                  margin="normal"
+                  name="password"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  type="password"
+                  value={values.password}
+                  variant="outlined"
+                />
+                <Box my={2}>
+                  <Button
+                    color="primary"
+                    // disabled={isSubmitting}
+                    fullWidth
+                    size="large"
+                    type="submit"
+                    variant="contained"
+                  >
+                    登录
+                  </Button>
+                </Box>
+                <Typography
+                  color="textSecondary"
+                  variant="body1"
+                >
+                  还没有账号？
+                  {' '}
+                  <Link
+                    component={RouterLink}
+                    to="/register"
+                    variant="h6"
+                  >
+                    注册
+                  </Link>
+                </Typography>
+              </form>
+            )}
           </Formik>
         </Container>
       </Box>

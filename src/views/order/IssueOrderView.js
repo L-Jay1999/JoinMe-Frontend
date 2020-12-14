@@ -174,7 +174,7 @@ const IssueOrderView = ({ className, ...rest }) => {
                   color="primary"
                   variant="contained"
                   onClick={() => {
-                    fetch('http://52.250.51.146:8080/order/issue', {
+                    fetch('http://localhost:8080/order/issue', {
                       method: 'post',
                       credentials: "include",
                       body: JSON.stringify(order),
