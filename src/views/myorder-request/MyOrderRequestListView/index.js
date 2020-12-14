@@ -59,7 +59,7 @@ const MyRequestList = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://localhost:8080/orderid/' + id, {
+        fetch('http://localhost:8080/orderrequest/orderid/' + id, {
             method: 'get',
             credentials: "include"
         }).then(res => res.json())
@@ -123,67 +123,67 @@ const MyRequestList = () => {
                                                             <RequestState status={value} />
                                                         </TableCell>
                                                     )
-                                                else (column.id === 'operation')
-                                                return (
-                                                    <TableCell>
-                                                        <Button color="primary" variant="contained" key={row.userId} onClick={
-                                                            () => {
-                                                                fetch('http://localhost:8080/' + row.requestId + '/approve', {
-                                                                    method: 'post',
-                                                                    credentials: "include",
+                                                else if (column.id === 'operation')
+                                                    return (
+                                                        <TableCell>
+                                                            <Button color="primary" variant="contained" key={row.userId} onClick={
+                                                                () => {
+                                                                    fetch('http://localhost:8080/orderrequest/' + row.requestId + '/approve', {
+                                                                        method: 'post',
+                                                                        credentials: "include",
+                                                                    }
+                                                                    ).then(res => res.json())
+                                                                        .then(data => {
+                                                                            if (data.code !== 10000)
+                                                                                alert('同意失败')
+                                                                            else {
+                                                                                alert('同意成功')
+                                                                                fetch('http://localhost:8080/orderrequest/orderid/' + id, {
+                                                                                    method: 'get',
+                                                                                    credentials: "include"
+                                                                                }).then(res => res.json())
+                                                                                    .then(data => {
+                                                                                        if (data.code === 10000)
+                                                                                            setRequest(data.data);
+                                                                                        else if (data.code === 10004)
+                                                                                            navigate('/login', { replace: true });
+                                                                                    });
+                                                                            }
+                                                                        })
                                                                 }
-                                                                ).then(res => res.json())
-                                                                    .then(data => {
-                                                                        if (data.code !== 10000)
-                                                                            alert('同意失败')
-                                                                        else {
-                                                                            alert('同意成功')
-                                                                            fetch('http://localhost:8080/orderid/' + id, {
-                                                                                method: 'get',
-                                                                                credentials: "include"
-                                                                            }).then(res => res.json())
-                                                                                .then(data => {
-                                                                                    if (data.code === 10000)
-                                                                                        setRequest(data.data);
-                                                                                    else if (data.code === 10004)
-                                                                                        navigate('/login', { replace: true });
-                                                                                });
-                                                                        }
-                                                                    })
-                                                            }
-                                                        }>
-                                                            同意
+                                                            }>
+                                                                同意
                                                         </Button>
-                                                        <Button color="secondary" variant="contained" key={row.userId} onClick={
-                                                            () => {
-                                                                fetch('http://localhost:8080/' + row.requestId + '/deny', {
-                                                                    method: 'post',
-                                                                    credentials: "include",
+                                                            <Button color="secondary" variant="contained" key={row.userId} onClick={
+                                                                () => {
+                                                                    fetch('http://localhost:8080/orderrequest/' + row.requestId + '/deny', {
+                                                                        method: 'post',
+                                                                        credentials: "include",
+                                                                    }
+                                                                    ).then(res => res.json())
+                                                                        .then(data => {
+                                                                            if (data.code !== 10000)
+                                                                                alert('拒绝失败')
+                                                                            else {
+                                                                                alert('拒绝成功')
+                                                                                fetch('http://localhost:8080/orderrequest/orderid/' + id, {
+                                                                                    method: 'get',
+                                                                                    credentials: "include"
+                                                                                }).then(res => res.json())
+                                                                                    .then(data => {
+                                                                                        if (data.code === 10000)
+                                                                                            setRequest(data.data);
+                                                                                        else if (data.code === 10004)
+                                                                                            navigate('/login', { replace: true });
+                                                                                    });
+                                                                            }
+                                                                        })
                                                                 }
-                                                                ).then(res => res.json())
-                                                                    .then(data => {
-                                                                        if (data.code !== 10000)
-                                                                            alert('拒绝失败')
-                                                                        else {
-                                                                            alert('拒绝成功')
-                                                                            fetch('http://localhost:8080/orderid/' + id, {
-                                                                                method: 'get',
-                                                                                credentials: "include"
-                                                                            }).then(res => res.json())
-                                                                                .then(data => {
-                                                                                    if (data.code === 10000)
-                                                                                        setRequest(data.data);
-                                                                                    else if (data.code === 10004)
-                                                                                        navigate('/login', { replace: true });
-                                                                                });
-                                                                        }
-                                                                    })
-                                                            }
-                                                        }>
-                                                            拒绝
+                                                            }>
+                                                                拒绝
                                                         </Button>
-                                                    </TableCell>
-                                                )
+                                                        </TableCell>
+                                                    )
                                                 return (
                                                     <TableCell key={column.id} align={column.align}>
                                                         {column.format && typeof value === 'number' ? column.format(value) : value}

@@ -146,7 +146,11 @@ const ProductList = () => {
                                                             }}>
                                                                 查看
                                                                 </Button>
-                                                            <Button color="primary" variant="contained">
+                                                            <Button color="primary" variant="contained" key={row.orderId} onClick={
+                                                                () => {
+                                                                    navigate('/app/myorderrequest/' + row.orderId, { replace: true })
+                                                                }
+                                                            }>
                                                                 请求
                                                                 </Button>
                                                             <Button variant="contained" color="secondary" key={row.orderId} onClick={() => {
