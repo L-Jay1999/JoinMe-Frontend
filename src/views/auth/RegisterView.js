@@ -76,9 +76,9 @@ const RegisterView = () => {
             }}
 
             onSubmit={(values) => {
-              values.cardType = values.cardType === '身份证'? 'Identity': 'Passport';
+              values.cardType = values.cardType === '身份证' ? 'Identity' : 'Passport';
               console.log(values);
-              fetch('http://52.250.51.146:8080/user/create', {
+              fetch('http://localhost:8080/user/create', {
                 method: 'post',
                 credentials: "include",
                 body: JSON.stringify(values),
@@ -105,79 +105,79 @@ const RegisterView = () => {
               touched,
               values,
             }) => (
-                <form onSubmit={handleSubmit}>
-                  <Box mb={3}>
-                    <Typography
-                      color="textPrimary"
-                      variant="h2"
-                      align="center"
-                    >
-                      注册
+              <form onSubmit={handleSubmit}>
+                <Box mb={3}>
+                  <Typography
+                    color="textPrimary"
+                    variant="h2"
+                    align="center"
+                  >
+                    注册
                   </Typography>
 
-                  </Box>
-                  <TextField
-                    error={Boolean(touched.userName && errors.userName)}
-                    fullWidth
-                    helperText={touched.userName && errors.userName}
-                    label="用户名"
-                    margin="normal"
-                    name="userName"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.userName}
-                    variant="outlined"
-                  />
+                </Box>
+                <TextField
+                  error={Boolean(touched.userName && errors.userName)}
+                  fullWidth
+                  helperText={touched.userName && errors.userName}
+                  label="用户名"
+                  margin="normal"
+                  name="userName"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.userName}
+                  variant="outlined"
+                />
 
-                  <TextField
-                    error={Boolean(touched.password && errors.password)}
-                    helperText={touched.password && errors.password}
-                    fullWidth
-                    label="密码"
-                    margin="normal"
-                    name="password"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    type="password"
-                    value={values.password}
-                    variant="outlined"
-                  />
+                <TextField
+                  error={Boolean(touched.password && errors.password)}
+                  helperText={touched.password && errors.password}
+                  fullWidth
+                  label="密码"
+                  margin="normal"
+                  name="password"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  type="password"
+                  value={values.password}
+                  variant="outlined"
+                />
 
-                  <TextField
-                    error={Boolean(touched.realName && errors.realName)}
-                    fullWidth
-                    helperText={touched.realName && errors.realName}
-                    label="姓名"
-                    margin="normal"
-                    name="realName"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.realName}
-                    variant="outlined"
-                  />
+                <TextField
+                  error={Boolean(touched.realName && errors.realName)}
+                  fullWidth
+                  helperText={touched.realName && errors.realName}
+                  label="姓名"
+                  margin="normal"
+                  name="realName"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.realName}
+                  variant="outlined"
+                />
 
-                  <Box mt={2} mb={0.5}>
-                    <FormControl variant="outlined" fullWidth className={classes.formControl}>
-                      <InputLabel id="demo-simple-select-outlined-label">证件类型</InputLabel>
-                      <Select
-                        error={Boolean(touched.cardType && errors.cardType)}
-                        label="证件类型"
-                        name="cardType"
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        value={values.cardType}>
-                        <MenuItem value="">
-                          <em>None</em>
-                        </MenuItem>
-                        <MenuItem value='身份证'>身份证</MenuItem>
-                        <MenuItem value='护照'>护照</MenuItem>
-                      </Select>
-                      <FormHelperText><font color="red">{touched.cardType && errors.cardType}</font></FormHelperText>
-                    </FormControl>
-                  </Box>
-                  
+                <Box mt={2} mb={0.5}>
+                  <FormControl variant="outlined" fullWidth className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-outlined-label">证件类型</InputLabel>
+                    <Select
+                      error={Boolean(touched.cardType && errors.cardType)}
+                      label="证件类型"
+                      name="cardType"
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.cardType}>
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value='身份证'>身份证</MenuItem>
+                      <MenuItem value='护照'>护照</MenuItem>
+                    </Select>
+                    <FormHelperText><font color="red">{touched.cardType && errors.cardType}</font></FormHelperText>
+                  </FormControl>
+                </Box>
 
-                  {/* <TextField
+
+                {/* <TextField
                   error={Boolean(touched.cardType && errors.cardType)}
                   helperText={touched.cardType && errors.cardType}
                 fullWidth
@@ -208,73 +208,73 @@ const RegisterView = () => {
               </TextField> */}
 
 
-                  <TextField
-                    error={Boolean(touched.cardNumber && errors.cardNumber)}
-                    fullWidth
-                    helperText={touched.cardNumber && errors.cardNumber}
-                    label="证件号"
-                    margin="normal"
-                    name="cardNumber"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.cardNumber}
-                    variant="outlined"
-                  />
+                <TextField
+                  error={Boolean(touched.cardNumber && errors.cardNumber)}
+                  fullWidth
+                  helperText={touched.cardNumber && errors.cardNumber}
+                  label="证件号"
+                  margin="normal"
+                  name="cardNumber"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.cardNumber}
+                  variant="outlined"
+                />
 
-                  <TextField
-                    error={Boolean(touched.phoneNumber && errors.phoneNumber)}
-                    fullWidth
-                    helperText={touched.phoneNumber && errors.phoneNumber}
-                    label="手机号"
-                    margin="normal"
-                    name="phoneNumber"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.phoneNumber}
-                    variant="outlined"
-                  />
+                <TextField
+                  error={Boolean(touched.phoneNumber && errors.phoneNumber)}
+                  fullWidth
+                  helperText={touched.phoneNumber && errors.phoneNumber}
+                  label="手机号"
+                  margin="normal"
+                  name="phoneNumber"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.phoneNumber}
+                  variant="outlined"
+                />
 
-                  <TextField
-                    error={Boolean(touched.introduction && errors.introduction)}
-                    fullWidth
-                    helperText={touched.introduction && errors.introduction}
-                    label="用户简介"
-                    margin="normal"
-                    name="introduction"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.introduction}
-                    variant="outlined"
-                  />
+                <TextField
+                  error={Boolean(touched.introduction && errors.introduction)}
+                  fullWidth
+                  helperText={touched.introduction && errors.introduction}
+                  label="用户简介"
+                  margin="normal"
+                  name="introduction"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.introduction}
+                  variant="outlined"
+                />
 
-                  <Box my={2}>
-                    <Button
-                      color="primary"
-                      disabled={isSubmitting}
-                      fullWidth
-                      size="large"
-                      type="submit"
-                      variant="contained"
-                    >
-                      注册
-                  </Button>
-                  </Box>
-                  <Typography
-                    color="textSecondary"
-                    variant="body1"
+                <Box my={2}>
+                  <Button
+                    color="primary"
+                    disabled={isSubmitting}
+                    fullWidth
+                    size="large"
+                    type="submit"
+                    variant="contained"
                   >
-                    已经有账号？
+                    注册
+                  </Button>
+                </Box>
+                <Typography
+                  color="textSecondary"
+                  variant="body1"
+                >
+                  已经有账号？
                   {' '}
-                    <Link
-                      component={RouterLink}
-                      to="/login"
-                      variant="h6"
-                    >
-                      登录
+                  <Link
+                    component={RouterLink}
+                    to="/login"
+                    variant="h6"
+                  >
+                    登录
                   </Link>
-                  </Typography>
-                </form>
-              )}
+                </Typography>
+              </form>
+            )}
           </Formik>
         </Container>
       </Box>

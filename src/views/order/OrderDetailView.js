@@ -70,9 +70,10 @@ const OrderDetailView = () => {
   const classes = useStyles();
   const navigate = useNavigate();
   const [userId, setUserId] = useState(-1);
+  const [imageUrl, setUrl] = useState("");
 
   useEffect(() => {
-    fetch('http://52.250.51.146:8080/order/' + id + '/request', {
+    fetch('http://localhost:8080/order/' + id + '/request', {
       method: 'get',
       credentials: "include",
     }).then(res => res.json()).then(res => {
@@ -82,21 +83,22 @@ const OrderDetailView = () => {
       console.log(permission);
     });
 
-    fetch('http://52.250.51.146:8080/order/' + id, {
+    fetch('http://localhost:8080/order/' + id, {
       method: 'get',
       credentials: "include",
     }).then(res => res.json())
       .then(data => {
         console.log(data);
         if (data.code === 10000) {
-          console.log("gdsgdgd");
           setDetail(data.data);
+          if (data.data.picture === null)
+            setUrl("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1812993978,4158651947&fm=26&gp=0.jpg")
         }
         else
           navigate('/login', { replace: true });
       });
 
-    fetch('http://52.250.51.146:8080/user/', {
+    fetch('http://localhost:8080/user/', {
       method: 'get',
       credentials: "include",
     }).then(res => res.json())
@@ -140,20 +142,9 @@ const OrderDetailView = () => {
                   component="img"
                   align="center"
                   alt="Contemplative Reptile"
-                  image="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1812993978,4158651947&fm=26&gp=0.jpg"
+                  image={imageUrl}
                   title="Contemplative Reptile"
                 />
-                <Button
-                  variant="contained"
-                  component="label"
-                  align="center"
-                >
-                  Upload File
-                  <input
-                    type="file"
-                    style={{ display: "none" }}
-                  />
-                </Button>
               </Grid>
               <Grid
                 item

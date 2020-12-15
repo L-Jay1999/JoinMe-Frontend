@@ -70,7 +70,7 @@ const IncomeList = () => {
   const [startDate, setStartDate] = useState("2020-01-01");
   const [endDate, setEndDate] = useState(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
   const [isType, setIsType] = useState(true);
-  const [chartData, setChartData] = useState({x:[],y:[]});
+  const [chartData, setChartData] = useState({ x: [], y: [] });
   //  const chartData = {
   //   x: ['2019-11-21', '2019-11-22', '2019-11-23', '2019-11-24', '2019-11-25', '2019-11-26'],
   //   y: [20, 50, 80, 70, 45, 85]
@@ -113,7 +113,7 @@ const IncomeList = () => {
     }
     else {
       alert(selectedCity, orderType);
-      fetch('http://52.250.51.146:8080/admin/detail',
+      fetch('http://localhost:8080/admin/detail',
         {
           method: "POST",
           body: JSON.stringify({
@@ -139,7 +139,7 @@ const IncomeList = () => {
       className={classes.root}
       title="Details"
     >
-      <LineChart data={ chartData} />
+      <LineChart data={chartData} />
       <Container maxWidth={false}>
         <Box
           display="flex"
