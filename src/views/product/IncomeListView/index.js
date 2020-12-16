@@ -78,17 +78,14 @@ const IncomeList = () => {
   const [startDate, setStartDate] = useState("2020-01-01");
   const [endDate, setEndDate] = useState(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
   const [isType, setIsType] = useState(true);
-<<<<<<< HEAD
   const [tableData, setTableData] = useState([]);
   const [chartData, setChartData] = useState({
     x: [],
-    y: {'income':[],'number':[]},
+    y: { 'income': [], 'number': [] },
   });
-  const tableData = [{ key: '1', date: '2019-11-21', locale: 'bei', orderType: 'xx', income: 20, number: 5 },
-  { key: '2', date: '2019-11-21', locale: 'bei', orderType: 'xx', income: 22, number: 6 }]
-=======
-  const [chartData, setChartData] = useState({ x: [], y: [] });
->>>>>>> ae1d9f6108652980262e9f1eb076f327dbc99970
+  // const tableData = [{ key: '1', date: '2019-11-21', locale: 'bei', orderType: 'xx', income: 20, number: 5 },
+  // { key: '2', date: '2019-11-21', locale: 'bei', orderType: 'xx', income: 22, number: 6 }]
+
   //  const chartData = {
   //   x: ['2019-11-21', '2019-11-22', '2019-11-23', '2019-11-24', '2019-11-25', '2019-11-26'],
   //   y: { 'income': [20, 50, 80, 70, 45, 85], 'number': [20, 50, 80, 70, 45, 85] }
@@ -122,12 +119,7 @@ const IncomeList = () => {
       setIsType(false);
     }
     else {
-<<<<<<< HEAD
       fetch('http://52.250.51.146:8080/admin/income',
-=======
-      alert(selectedCity, orderType);
-      fetch('http://localhost:8080/admin/detail',
->>>>>>> ae1d9f6108652980262e9f1eb076f327dbc99970
         {
           method: "POST",
           body: JSON.stringify({
@@ -145,7 +137,7 @@ const IncomeList = () => {
           console.log(val);
           const { data } = val;
           const temp = [];
-          const tempChartData = {x:[],y:{ 'income': [],'number':[]}};
+          const tempChartData = { x: [], y: { 'income': [], 'number': [] } };
           data.map((val, index) => {
             temp.push({
               key: index,
@@ -156,25 +148,24 @@ const IncomeList = () => {
               number: data.__length__
             });
             tempChartData.x.push(val['date']);
-            tempChartData.y.income.push( val['income']);
+            tempChartData.y.income.push(val['income']);
             tempChartData.y.number.push(data.__length__);
           });
-           setTableData(temp);
-           setChartData(tempChartData);
+          setTableData(temp);
+          setChartData(tempChartData);
         })
-        .catch(err=>{
+        .catch(err => {
           console.log(err);
           alert("查询错误，请重试！");
         })
-        // setChartData({
-        //   x: ['2019-11-21', '2019-11-22', '2019-11-23', '2019-11-24', '2019-11-25', '2019-11-26'],
-        //   y: { 'income': [20, 50, 80, 70, 45, 85], 'number': [10, 20, 30, 70, 45, 90] }
-        // })
+      // setChartData({
+      //   x: ['2019-11-21', '2019-11-22', '2019-11-23', '2019-11-24', '2019-11-25', '2019-11-26'],
+      //   y: { 'income': [20, 50, 80, 70, 45, 85], 'number': [10, 20, 30, 70, 45, 90] }
+      // })
     }
   }
 
   return (
-<<<<<<< HEAD
     <div>
       <Page
         className={classes.root}
@@ -249,81 +240,6 @@ const IncomeList = () => {
             </FormControl>
             <Button className={classes.Button} variant="contained" color="primary" onClick={handleClick}>
               查询
-=======
-    <Page
-      className={classes.root}
-      title="Details"
-    >
-      <LineChart data={chartData} />
-      <Container maxWidth={false}>
-        <Box
-          display="flex"
-          justifyContent="space-between"
-        >
-          <TextField
-            id="startDate"
-            label="请选择起始时间"
-            type="date"
-            defaultValue="2020-01-01"
-            className={classes.textField}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={handleDate}
-          />
-          <TextField
-            id="endDate"
-            label="请选择终止时间"
-            type="date"
-            defaultValue={endDate}
-            className={classes.textField}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={handleDate}
-          />
-          <FormControl variant="outlined" className={classes.formControl} >
-            <InputLabel>请选择城市</InputLabel>
-            <Select
-              id="selectedCity"
-              value={selectedCity}
-              onChange={handleCity}
-            >
-              {
-                Object.keys(cityData).map(key => {
-                  let city = cityData[key];
-                  return (
-                    <MenuItem value={city}>
-                      {city}
-                    </MenuItem>
-                  )
-                })
-              }
-            </Select>
-          </FormControl>
-          <FormControl variant="outlined" className={classes.formControl} error={!isType}>
-            <InputLabel>请选择信令类型</InputLabel>
-            <Select
-              id="orderType"
-              value={orderType}
-              onChange={handleOrderType}
-            >
-              {
-                Object.keys(orderTypes).map(key => {
-                  let type = orderTypes[key];
-                  return (
-                    <MenuItem value={key}>
-                      {type}
-                    </MenuItem>
-                  )
-                })
-              }
-            </Select>
-            {isType || <FormHelperText>需选择信令类型</FormHelperText>}
-          </FormControl>
-          <Button className={classes.Button} variant="contained" color="primary" onClick={handleClick}>
-            查询
->>>>>>> ae1d9f6108652980262e9f1eb076f327dbc99970
         </Button>
           </Box>
           <br />
@@ -331,7 +247,7 @@ const IncomeList = () => {
             <Table
               columns={columns}
               dataSource={tableData}
-              pagination={{ position: ['bottomCenter'], showSizeChanger:true, showQuickJumper:true }}
+              pagination={{ position: ['bottomCenter'], showSizeChanger: true, showQuickJumper: true }}
             />
           </Paper>
         </Container>
