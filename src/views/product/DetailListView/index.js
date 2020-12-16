@@ -116,6 +116,7 @@ const DetailList = () => {
       fetch('http://52.250.51.146:8080/admin/detail',
         {
           method: "POST",
+          credentials: "include",
           body: JSON.stringify({
             'startDate': startDate,
             'endDate': endDate,
@@ -135,7 +136,7 @@ const DetailList = () => {
               'orderId': val.orderId,
               'number': val.acceptUsers.__length__,
               'finishDate': GMTToStr(val.finishDate),
-              'fee': (val.acceptUsers.__length__*4 + 20),
+              'fee': (val.acceptUsers.__length__ * 4 + 20),
             })
           })
           setTableData(temp);
