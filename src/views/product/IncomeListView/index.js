@@ -24,9 +24,6 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(3),
     paddingTop: theme.spacing(3)
   },
-  productCard: {
-    height: '100%'
-  },
   formControl: {
     minWidth: 150,
   },
@@ -81,14 +78,17 @@ const IncomeList = () => {
   const [startDate, setStartDate] = useState("2020-01-01");
   const [endDate, setEndDate] = useState(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
   const [isType, setIsType] = useState(true);
-  // const [tableData, setTableData] = useState([]);
-  // const [chartData, setChartData] = useState({x:[],y:[]});
+  const [tableData, setTableData] = useState([]);
+  const [chartData, setChartData] = useState({
+    x: [],
+    y: {'income':[],'number':[]},
+  });
   const tableData = [{ key: '1', date: '2019-11-21', locale: 'bei', orderType: 'xx', income: 20, number: 5 },
   { key: '2', date: '2019-11-21', locale: 'bei', orderType: 'xx', income: 22, number: 6 }]
-  const chartData = {
-    x: ['2019-11-21', '2019-11-22', '2019-11-23', '2019-11-24', '2019-11-25', '2019-11-26'],
-    y: { 'income': [20, 50, 80, 70, 45, 85], 'number': [20, 50, 80, 70, 45, 85] }
-  };
+  //  const chartData = {
+  //   x: ['2019-11-21', '2019-11-22', '2019-11-23', '2019-11-24', '2019-11-25', '2019-11-26'],
+  //   y: { 'income': [20, 50, 80, 70, 45, 85], 'number': [20, 50, 80, 70, 45, 85] }
+  // };
 
 
   const handleDate = (e) => {
@@ -118,7 +118,6 @@ const IncomeList = () => {
       setIsType(false);
     }
     else {
-      alert(selectedCity, orderType);
       fetch('http://52.250.51.146:8080/admin/income',
         {
           method: "POST",
@@ -151,9 +150,17 @@ const IncomeList = () => {
             tempChartData.y.income.push( val['income']);
             tempChartData.y.number.push(data.__length__);
           });
-          //  setTableData(temp);
-          //  setChartData(tempChartData);
+           setTableData(temp);
+           setChartData(tempChartData);
         })
+        .catch(err=>{
+          console.log(err);
+          alert("查询错误，请重试！");
+        })
+        // setChartData({
+        //   x: ['2019-11-21', '2019-11-22', '2019-11-23', '2019-11-24', '2019-11-25', '2019-11-26'],
+        //   y: { 'income': [20, 50, 80, 70, 45, 85], 'number': [10, 20, 30, 70, 45, 90] }
+        // })
     }
   }
 
