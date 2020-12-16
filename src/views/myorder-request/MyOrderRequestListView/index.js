@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
     Paper,
     Table,
@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 const columns = [
     { id: 'orderId', label: '召集令号' },
+    { id: 'userId', label: '用户Id' },
     { id: 'description', label: '描述' },
     { id: 'modifyDate', label: '修改时间' },
     { id: 'requestState', label: '请求状态' },
@@ -49,6 +50,7 @@ const RequestState = (props) => {
 }
 
 const MyRequestList = () => {
+    const { id } = useParams();
     const classes = useStyles();
     const [requests, setRequest] = useState([]);
     const [page, setPage] = useState(0);
@@ -57,7 +59,7 @@ const MyRequestList = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://localhost:8080/orderrequest/', {
+        fetch('http://localhost:8080/orderrequest/orderid/' + id, {
             method: 'get',
             credentials: "include"
         }).then(res => res.json())
@@ -87,7 +89,7 @@ const MyRequestList = () => {
     return (
         <Page
             className={classes.root}
-            title="MyRequests"
+            title="MyOrder"
         >
             <Container maxWidth={false}>
                 <Toolbar filterText={filterText}
@@ -123,26 +125,20 @@ const MyRequestList = () => {
                                                     )
                                                 else if (column.id === 'operation')
                                                     return (
-                                                        <TableCell >
-                                                            <Button color="primary" variant="contained" key={row.orderId} onClick={() => {
-                                                                // window.location.href = '/app/orders/' + row.orderId;
-                                                                navigate('/app/orders/' + row.orderId, { replace: true });
-                                                            }}>
-                                                                查看召集令
-                                                                </Button>
-                                                            <Button color="secondary" variant="contained" key={row.requestId} onClick={
+                                                        <TableCell>
+                                                            <Button color="primary" variant="contained" key={row.userId} onClick={
                                                                 () => {
-                                                                    fetch('http://localhost:8080/orderrequest/' + row.requestId, {
-                                                                        method: 'delete',
+                                                                    fetch('http://localhost:8080/orderrequest/' + row.requestId + '/approve', {
+                                                                        method: 'post',
                                                                         credentials: "include",
                                                                     }
                                                                     ).then(res => res.json())
                                                                         .then(data => {
                                                                             if (data.code !== 10000)
-                                                                                alert('删除失败')
+                                                                                alert('同意失败')
                                                                             else {
-                                                                                alert('删除成功')
-                                                                                fetch('http://localhost:8080/orderrequest/', {
+                                                                                alert('同意成功')
+                                                                                fetch('http://localhost:8080/orderrequest/orderid/' + id, {
                                                                                     method: 'get',
                                                                                     credentials: "include"
                                                                                 }).then(res => res.json())
@@ -156,8 +152,36 @@ const MyRequestList = () => {
                                                                         })
                                                                 }
                                                             }>
-                                                                删除
-                                                            </Button>
+                                                                同意
+                                                        </Button>
+                                                            <Button color="secondary" variant="contained" key={row.userId} onClick={
+                                                                () => {
+                                                                    fetch('http://localhost:8080/orderrequest/' + row.requestId + '/deny', {
+                                                                        method: 'post',
+                                                                        credentials: "include",
+                                                                    }
+                                                                    ).then(res => res.json())
+                                                                        .then(data => {
+                                                                            if (data.code !== 10000)
+                                                                                alert('拒绝失败')
+                                                                            else {
+                                                                                alert('拒绝成功')
+                                                                                fetch('http://localhost:8080/orderrequest/orderid/' + id, {
+                                                                                    method: 'get',
+                                                                                    credentials: "include"
+                                                                                }).then(res => res.json())
+                                                                                    .then(data => {
+                                                                                        if (data.code === 10000)
+                                                                                            setRequest(data.data);
+                                                                                        else if (data.code === 10004)
+                                                                                            navigate('/login', { replace: true });
+                                                                                    });
+                                                                            }
+                                                                        })
+                                                                }
+                                                            }>
+                                                                拒绝
+                                                        </Button>
                                                         </TableCell>
                                                     )
                                                 return (
