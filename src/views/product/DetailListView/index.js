@@ -41,7 +41,6 @@ const orderTypes = {
 }
 
 
-
 const DetailList = () => {
   const classes = useStyles();
   const date = new Date();
