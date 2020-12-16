@@ -51,7 +51,7 @@ class LineChart extends Component {
         {
           name: '成交单数',
           type: 'line',
-          data: data.y,
+          data: data.y['number'],
           smooth: false,
           lineStyle: {
             color: '#1E90FF',
@@ -65,17 +65,15 @@ class LineChart extends Component {
         {
           name: '中介费金额',
           type: 'bar',
-          data: data.y,
+          data: data.y['income'],
           barWidth: '15%',
         }
       ]
     }
-    myEcharts.setOption(option)
-    myEcharts.on('finished', () => {
-      myEcharts.resize()
-    })
+    setTimeout(()=>{
+      myEcharts.setOption(option);
+    },500)
   }
-
   render() {
     return (
       <div ref={(c) => { this.echartsBox = c }} style={{ width: '100%', height: 500 }} />

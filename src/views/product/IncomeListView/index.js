@@ -1,14 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   Paper,
-  Table,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  TablePagination,
   Container,
   makeStyles,
   Box,
@@ -23,16 +15,14 @@ import {
 import Page from 'src/components/Page';
 import LineChart from './LineChart';
 import cityData from '../city.json';
-
+import { Table } from 'antd';
+import 'antd/dist/antd.css';
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.dark,
     minHeight: '100%',
     paddingBottom: theme.spacing(3),
     paddingTop: theme.spacing(3)
-  },
-  productCard: {
-    height: '100%'
   },
   formControl: {
     minWidth: 150,
@@ -51,39 +41,59 @@ const orderTypes = {
 }
 
 const columns = [
-  { id: 'date', label: '日期' },
-  { id: 'income', label: '收入' },
-  { id: 'locale', label: '地域' },
-  { id: 'orderType', label: '召集类型' },
-
-];
+  {
+    title: '日期',
+    dataIndex: 'date',
+  },
+  {
+    title: '地域',
+    dataIndex: 'locale',
+  },
+  {
+    title: '召集类型',
+    dataIndex: 'orderType',
+  },
+  {
+    title: '中介费金额',
+    dataIndex: 'income',
+    sorter: {
+      compare: (a, b) => a.income - b.income
+    }
+  },
+  {
+    title: '成交单数',
+    dataIndex: 'number',
+    sorter: {
+      compare: (a, b) => a.number - b.number
+    }
+  }
+]
 
 const IncomeList = () => {
   const classes = useStyles();
   const date = new Date();
 
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [details, setDetails] = useState([]);
   const [selectedCity, setSelectedCity] = useState('');
   const [orderType, setOrderType] = useState('');
   const [startDate, setStartDate] = useState("2020-01-01");
   const [endDate, setEndDate] = useState(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
   const [isType, setIsType] = useState(true);
+<<<<<<< HEAD
+  const [tableData, setTableData] = useState([]);
+  const [chartData, setChartData] = useState({
+    x: [],
+    y: {'income':[],'number':[]},
+  });
+  const tableData = [{ key: '1', date: '2019-11-21', locale: 'bei', orderType: 'xx', income: 20, number: 5 },
+  { key: '2', date: '2019-11-21', locale: 'bei', orderType: 'xx', income: 22, number: 6 }]
+=======
   const [chartData, setChartData] = useState({ x: [], y: [] });
+>>>>>>> ae1d9f6108652980262e9f1eb076f327dbc99970
   //  const chartData = {
   //   x: ['2019-11-21', '2019-11-22', '2019-11-23', '2019-11-24', '2019-11-25', '2019-11-26'],
-  //   y: [20, 50, 80, 70, 45, 85]
+  //   y: { 'income': [20, 50, 80, 70, 45, 85], 'number': [20, 50, 80, 70, 45, 85] }
   // };
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
 
   const handleDate = (e) => {
     switch (e.target.id) {
@@ -112,8 +122,12 @@ const IncomeList = () => {
       setIsType(false);
     }
     else {
+<<<<<<< HEAD
+      fetch('http://52.250.51.146:8080/admin/income',
+=======
       alert(selectedCity, orderType);
       fetch('http://localhost:8080/admin/detail',
+>>>>>>> ae1d9f6108652980262e9f1eb076f327dbc99970
         {
           method: "POST",
           body: JSON.stringify({
@@ -128,13 +142,114 @@ const IncomeList = () => {
         })
         .then(res => res.json())
         .then(val => {
+          console.log(val);
           const { data } = val;
-          setDetails(data);
+          const temp = [];
+          const tempChartData = {x:[],y:{ 'income': [],'number':[]}};
+          data.map((val, index) => {
+            temp.push({
+              key: index,
+              date: val['date'],
+              income: val['income'],
+              locale: val['locale'],
+              orderType: orderTypes[val['orderType']],
+              number: data.__length__
+            });
+            tempChartData.x.push(val['date']);
+            tempChartData.y.income.push( val['income']);
+            tempChartData.y.number.push(data.__length__);
+          });
+           setTableData(temp);
+           setChartData(tempChartData);
         })
+        .catch(err=>{
+          console.log(err);
+          alert("查询错误，请重试！");
+        })
+        // setChartData({
+        //   x: ['2019-11-21', '2019-11-22', '2019-11-23', '2019-11-24', '2019-11-25', '2019-11-26'],
+        //   y: { 'income': [20, 50, 80, 70, 45, 85], 'number': [10, 20, 30, 70, 45, 90] }
+        // })
     }
   }
 
   return (
+<<<<<<< HEAD
+    <div>
+      <Page
+        className={classes.root}
+        title="Income"
+      >
+        <LineChart data={chartData} />
+        <Container maxWidth={false}>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+          >
+            <TextField
+              id="startDate"
+              label="请选择起始时间"
+              type="date"
+              defaultValue="2020-01-01"
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={handleDate}
+            />
+            <TextField
+              id="endDate"
+              label="请选择终止时间"
+              type="date"
+              defaultValue={endDate}
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={handleDate}
+            />
+            <FormControl variant="outlined" className={classes.formControl} >
+              <InputLabel>请选择城市</InputLabel>
+              <Select
+                id="selectedCity"
+                value={selectedCity}
+                onChange={handleCity}
+              >
+                {
+                  Object.keys(cityData).map(key => {
+                    let city = cityData[key];
+                    return (
+                      <MenuItem value={city}>
+                        {city}
+                      </MenuItem>
+                    )
+                  })
+                }
+              </Select>
+            </FormControl>
+            <FormControl variant="outlined" className={classes.formControl} error={!isType}>
+              <InputLabel>请选择信令类型</InputLabel>
+              <Select
+                id="orderType"
+                value={orderType}
+                onChange={handleOrderType}
+              >
+                {
+                  Object.keys(orderTypes).map(key => {
+                    let type = orderTypes[key];
+                    return (
+                      <MenuItem value={key}>
+                        {type}
+                      </MenuItem>
+                    )
+                  })
+                }
+              </Select>
+              {isType || <FormHelperText>需选择信令类型</FormHelperText>}
+            </FormControl>
+            <Button className={classes.Button} variant="contained" color="primary" onClick={handleClick}>
+              查询
+=======
     <Page
       className={classes.root}
       title="Details"
@@ -208,53 +323,20 @@ const IncomeList = () => {
           </FormControl>
           <Button className={classes.Button} variant="contained" color="primary" onClick={handleClick}>
             查询
+>>>>>>> ae1d9f6108652980262e9f1eb076f327dbc99970
         </Button>
-        </Box>
-        <br />
-        <Paper >
-          <TableContainer className={classes.container}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  {columns.map((column) => (
-                    <TableCell
-                      key={column.id}
-                    >
-                      {column.label}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {details.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                  return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={row.orderId}>
-                      {columns.map((column) => {
-                        const value = row[column.id];
-                        return (
-                          <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === 'number' ? column.format(value) : value}
-                          </TableCell>
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={details.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
-          />
-        </Paper>
-      </Container>
-    </Page>
+          </Box>
+          <br />
+          <Paper >
+            <Table
+              columns={columns}
+              dataSource={tableData}
+              pagination={{ position: ['bottomCenter'], showSizeChanger:true, showQuickJumper:true }}
+            />
+          </Paper>
+        </Container>
+      </Page>
+    </div>
   );
 };
 
