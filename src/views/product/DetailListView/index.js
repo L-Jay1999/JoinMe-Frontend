@@ -1,14 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   Paper,
-  Table,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  TablePagination,
   Container,
   makeStyles,
   Box,
@@ -21,7 +13,8 @@ import {
   InputLabel
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-
+import { Table } from 'antd';
+import 'antd/dist/antd.css';
 import cityData from '../city.json';
 
 const useStyles = makeStyles((theme) => ({
@@ -30,9 +23,6 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '100%',
     paddingBottom: theme.spacing(3),
     paddingTop: theme.spacing(3)
-  },
-  productCard: {
-    height: '100%'
   },
   formControl: {
     minWidth: 150,
@@ -50,35 +40,40 @@ const orderTypes = {
   'Play': '游玩'
 }
 
-const columns = [
-  { id: 'orderId', label: '召集令号' },
-  { id: 'number', label: '召集人数' },
-  { id: 'finishDate', label: '达成日期' },
-  { id: 'fee', label: '中介费' },
 
-];
 
 const DetailList = () => {
   const classes = useStyles();
   const date = new Date();
 
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [details, setDetails] = useState([]);
+  const [tableData, setTableData] = useState([]);
+  // const tableData = [
+  //   {'orderId':'1', 'number': 10 , 'finishDate':'2018-07-05', 'fee':60 }, {'orderId':'2', 'number': 15 , 'finishDate':'2018-06-05', 'fee':80 }
+  // ]
   const [selectedCity, setSelectedCity] = React.useState('');
   const [orderType, setOrderType] = React.useState('');
   const [startDate, setStartDate] = React.useState("2020-01-01");
   const [endDate, setEndDate] = React.useState(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
   const [isType, setIsType] = React.useState(true);
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+  const columns = [
+    {
+      title: '召集令号',
+      dataIndex: 'orderId',
+    },
+    {
+      title: '召集人数',
+      dataIndex: 'number',
+    },
+    {
+      title: '达成日期',
+      dataIndex: 'finishDate',
+    },
+    {
+      title: '中介费',
+      dataIndex: 'fee'
+    }
+  ]
 
   const handleDate = (e) => {
     switch (e.target.id) {
@@ -100,6 +95,17 @@ const DetailList = () => {
   const handleOrderType = (e) => {
     setOrderType(e.target.value);
     setIsType(true);
+  }
+
+  const GMTToStr = (time) => {
+    const date = new Date(time);
+    const Str = date.getFullYear() + '-' +
+      (date.getMonth() + 1) + '-' +
+      date.getDate() + ' ' +
+      date.getHours() + ':' +
+      date.getMinutes() + ':' +
+      date.getSeconds();
+    return Str;
   }
 
   const handleClick = () => {
@@ -124,7 +130,20 @@ const DetailList = () => {
         .then(res => res.json())
         .then(val => {
           const { data } = val;
-          setDetails(data);
+          const temp = []
+          data.map((val) => {
+            temp.push({
+              'orderId': val.orderId,
+              'number': val.acceptUsers.__length__,
+              'finishDate': GMTToStr(val.finishDate),
+              'fee': (val.acceptUsers.__length__*4 + 20),
+            })
+          })
+          setTableData(temp);
+        })
+        .catch(err => {
+          console.log(err);
+          alert("查询错误，请重试！");
         })
     }
   }
@@ -191,7 +210,7 @@ const DetailList = () => {
                 Object.keys(orderTypes).map(key => {
                   let type = orderTypes[key];
                   return (
-                    <MenuItem value={key}>
+                    <MenuItem value={type}>
                       {type}
                     </MenuItem>
                   )
@@ -206,45 +225,10 @@ const DetailList = () => {
         </Box>
         <br />
         <Paper >
-          <TableContainer className={classes.container}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  {columns.map((column) => (
-                    <TableCell
-                      key={column.id}
-                    >
-                      {column.label}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {details.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                  return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={row.orderId}>
-                      {columns.map((column) => {
-                        const value = row[column.id];
-                        return (
-                          <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === 'number' ? column.format(value) : value}
-                          </TableCell>
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={details.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
+          <Table
+            columns={columns}
+            dataSource={tableData}
+            pagination={{ position: ['bottomCenter'], showSizeChanger: true, showQuickJumper: true }}
           />
         </Paper>
       </Container>

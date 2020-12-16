@@ -72,9 +72,6 @@ class LineChart extends Component {
     }
     setTimeout(()=>{
       myEcharts.setOption(option);
-      // myEcharts.on('finished', () => {
-      //   myEcharts.resize()
-      // })
     },500)
   }
   render() {
