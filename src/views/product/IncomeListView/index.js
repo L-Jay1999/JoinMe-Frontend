@@ -123,6 +123,7 @@ const IncomeList = () => {
       fetch('http://52.250.51.146:8080/admin/detail',
         {
           method: "POST",
+          credentials: "include",
           body: JSON.stringify({
             'startDate': startDate,
             'endDate': endDate,
