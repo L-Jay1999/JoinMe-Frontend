@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import {
     Box,
     Button,
@@ -12,6 +13,7 @@ import {
     CardHeader,
     Divider,
     Grid,
+    IconButton,
     TextField,
     Typography,
     makeStyles,
@@ -20,6 +22,7 @@ import {
     MenuItem,
     FormControl
 } from '@material-ui/core';
+import { Done } from '@material-ui/icons';
 
 const useStyles = makeStyles(() => ({
     root: {}
@@ -41,7 +44,7 @@ const OrderDetails = ({ className, ...rest }) => {
     const [imageUrl, setUrl] = useState("");
 
     useEffect(() => {
-        fetch('http://localhost:8080/order/' + id, {
+        fetch('http://52.250.51.146:8080/order/' + id, {
             method: 'get',
             credentials: "include",
         }).then(res => res.json())
@@ -85,20 +88,41 @@ const OrderDetails = ({ className, ...rest }) => {
                                 title="Contemplative Reptile"
                                 id="picture"
                             />
+                            <input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
+                            <label htmlFor="icon-button-file">
+                                <IconButton color="primary" aria-label="upload picture" component="span">
+                                    <PhotoCamera />
+                                </IconButton>
+                            </label>
+                            <label htmlFor="submit">
+                                <IconButton color="primary" aria-label="submit picture" component="span">
+                                    <Done />
+                                </IconButton>
+                            </label>
                         </Grid>
                         <Grid item xs={12} sm container>
-                            <Grid item xs container direction="column" spacing={2}>
-                                <Grid item xs>
-                                    <Typography gutterBottom variant="subtitle1">
-                                        Standard license
-                                    </Typography>
-                                    <Typography variant="body2" gutterBottom>
-                                        Full resolution 1920x1080 • JPEG
-                                    </Typography>
-                                    <Typography variant="body2" color="textSecondary">
-                                        ID: 1030114
-                                    </Typography>
-                                </Grid>
+                            <Grid item xs container spacing={2}>
+                                <TextField
+                                    label="召集令id"
+                                    name="orderId"
+                                    onChange={handleChange}
+                                    value={values.orderId}
+                                    variant="outlined"
+                                />
+                                <FormControl variant="outlined" className={classes.formControl}>
+                                    <InputLabel required>召集令类型</InputLabel>
+                                    <Select
+                                        label="召集令类型"
+                                        name="orderType"
+                                        onChange={handleChange}
+                                        value={values.orderType}>
+                                        <MenuItem value='Technology'>科技交流</MenuItem>
+                                        <MenuItem value='Study'>我爱学习</MenuItem>
+                                        <MenuItem value='SocialExperience'>社会经验</MenuItem>
+                                        <MenuItem value='PublicBenefit'>人民福祉</MenuItem>
+                                        <MenuItem value='play'>玩</MenuItem>
+                                    </Select>
+                                </FormControl>
                                 <Grid item>
                                     <Typography variant="body2" style={{ cursor: 'pointer' }}>
                                         Remove

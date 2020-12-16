@@ -113,7 +113,7 @@ const DetailList = () => {
     }
     else {
       alert(selectedCity, orderType);
-      fetch('http://localhost:8080/admin/detail',
+      fetch('http://52.250.51.146:8080/admin/detail',
         {
           method: "POST",
           body: JSON.stringify({
