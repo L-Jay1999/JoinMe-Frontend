@@ -134,6 +134,7 @@ const IncomeList = () => {
         })
         .then(res => res.json())
         .then(val => {
+          console.log(val);
           const { data } = val;
           const temp = [];
           const tempChartData = {x:[],y:{ 'income': [],'number':[]}};
