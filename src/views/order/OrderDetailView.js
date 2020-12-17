@@ -93,6 +93,8 @@ const OrderDetailView = () => {
           setDetail(data.data);
           if (data.data.picture === null)
             setUrl("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1812993978,4158651947&fm=26&gp=0.jpg")
+          else
+            setUrl(data.data.picture)
         }
         else
           navigate('/login', { replace: true });

@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import {
-    Box,
-    Button,
-    ButtonBase,
     Card,
     CardContent,
     CardMedia,
     CardHeader,
     Divider,
     Grid,
-    IconButton,
     TextField,
     Typography,
     makeStyles,
@@ -22,7 +16,6 @@ import {
     MenuItem,
     FormControl
 } from '@material-ui/core';
-import { Done } from '@material-ui/icons';
 
 const useStyles = makeStyles(() => ({
     root: {}
@@ -42,6 +35,7 @@ const OrderDetails = ({ className, ...rest }) => {
         'orderState': ''
     });
     const [imageUrl, setUrl] = useState("");
+    const imageUploadUrl = 'http://52.250.51.146:8080/order/' + id + '/upload'
 
     useEffect(() => {
         fetch('http://52.250.51.146:8080/order/' + id, {
@@ -53,6 +47,8 @@ const OrderDetails = ({ className, ...rest }) => {
                     setValues(data.data);
                     if (data.data.picture === null)
                         setUrl("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1812993978,4158651947&fm=26&gp=0.jpg")
+                    else
+                        setUrl(data.data.picture)
                 }
                 else
                     navigate('/login', { replace: true });
@@ -88,17 +84,21 @@ const OrderDetails = ({ className, ...rest }) => {
                                 title="Contemplative Reptile"
                                 id="picture"
                             />
-                            <input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
-                            <label htmlFor="icon-button-file">
-                                <IconButton color="primary" aria-label="upload picture" component="span">
-                                    <PhotoCamera />
-                                </IconButton>
-                            </label>
-                            <label htmlFor="submit">
-                                <IconButton color="primary" aria-label="submit picture" component="span">
-                                    <Done />
-                                </IconButton>
-                            </label>
+                            <form action={imageUploadUrl} method="post" enctype="multipart/form-data" id="imageUpload">
+                                <input type="file" id="uploadImage" name="file" />
+                                <input type="button" value="提交" onClick={
+                                    () => {
+                                        let uploadimage = document.getElementById("uploadImage")
+                                        if (uploadimage.files.length == 0)
+                                            alert("未选择文件")
+                                        else {
+                                            let form = document.getElementById("imageUpload")
+                                            form.submit()
+                                        }
+                                    }
+                                } />
+                                <input type="reset" value="清空" />
+                            </form>
                         </Grid>
                         <Grid item xs={12} sm container>
                             <Grid item xs container spacing={2}>
@@ -136,7 +136,7 @@ const OrderDetails = ({ className, ...rest }) => {
                     </Grid>
                 </CardContent>
             </Card>
-        </form>
+        </form >
     )
 }
 
