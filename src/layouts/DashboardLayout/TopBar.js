@@ -45,7 +45,7 @@ const GenerateButton = ({ data, navigate }) => {
       <Hidden mdDown>
         <IconButton color="inherit">
           <Button variant="contained" color="primary" onClick={() => {
-            fetch('http://52.250.51.146:8080/logout', {
+            fetch('http://localhost:8080/logout', {
               method: 'post',
               credentials: "include",
             }).then(window.location.href = '/app/products');

@@ -42,17 +42,22 @@ const OrderDetails = ({ className, ...rest }) => {
         'orderState': ''
     });
     const [imageUrl, setUrl] = useState("");
+    const imageUploadUrl = 'http://localhost:8080/order/' + id + '/upload'
 
     useEffect(() => {
-        fetch('http://52.250.51.146:8080/order/' + id, {
+        fetch('http://localhost:8080/order/' + id, {
             method: 'get',
             credentials: "include",
         }).then(res => res.json())
             .then(data => {
                 if (data.code === 10000) {
                     setValues(data.data);
+                    console.log(data.data);
+                    console.log(data.data.picture)
                     if (data.data.picture === null)
                         setUrl("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1812993978,4158651947&fm=26&gp=0.jpg")
+                    else
+                        setUrl(data.data.picture)
                 }
                 else
                     navigate('/login', { replace: true });
@@ -88,17 +93,11 @@ const OrderDetails = ({ className, ...rest }) => {
                                 title="Contemplative Reptile"
                                 id="picture"
                             />
-                            <input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
-                            <label htmlFor="icon-button-file">
-                                <IconButton color="primary" aria-label="upload picture" component="span">
-                                    <PhotoCamera />
-                                </IconButton>
-                            </label>
-                            <label htmlFor="submit">
-                                <IconButton color="primary" aria-label="submit picture" component="span">
-                                    <Done />
-                                </IconButton>
-                            </label>
+                            <form action={imageUploadUrl} method="post" enctype="multipart/form-data" id="imageUpload">
+                                <input type="file" name="file" />
+                                <input type="submit" value="提交" />
+                                <input type="reset" value="清空" />
+                            </form>
                         </Grid>
                         <Grid item xs={12} sm container>
                             <Grid item xs container spacing={2}>
@@ -136,7 +135,7 @@ const OrderDetails = ({ className, ...rest }) => {
                     </Grid>
                 </CardContent>
             </Card>
-        </form>
+        </form >
     )
 }
 
