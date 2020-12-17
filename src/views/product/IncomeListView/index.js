@@ -119,7 +119,11 @@ const IncomeList = () => {
       setIsType(false);
     }
     else {
-      fetch('http://localhost:8080/admin/income',
+      console.log(startDate)
+      console.log(endDate)
+      console.log(selectedCity)
+      console.log(orderType)
+      fetch('http://52.250.51.146:8080/admin/income',
         {
           method: "POST",
           credentials: "include",
@@ -146,11 +150,11 @@ const IncomeList = () => {
               income: val['income'],
               locale: val['locale'],
               orderType: orderTypes[val['orderType']],
-              number: data.__length__
+              number: data.length
             });
             tempChartData.x.push(val['date']);
             tempChartData.y.income.push(val['income']);
-            tempChartData.y.number.push(data.__length__);
+            tempChartData.y.number.push(data.length);
           });
           setTableData(temp);
           setChartData(tempChartData);

@@ -112,8 +112,9 @@ const DetailList = () => {
       setIsType(false);
     }
     else {
-      alert(selectedCity, orderType);
-      fetch('http://localhost:8080/admin/detail',
+      alert(orderType);
+      console.log(orderType);
+      fetch('http://52.250.51.146:8080/admin/detail',
         {
           method: "POST",
           credentials: "include",
@@ -134,9 +135,9 @@ const DetailList = () => {
           data.map((val) => {
             temp.push({
               'orderId': val.orderId,
-              'number': val.acceptUsers.__length__,
+              'number': val.acceptUsers.length,
               'finishDate': GMTToStr(val.finishDate),
-              'fee': (val.acceptUsers.__length__ * 4 + 20),
+              'fee': (val.acceptUsers.length * 4 + 20),
             })
           })
           setTableData(temp);
@@ -210,7 +211,7 @@ const DetailList = () => {
                 Object.keys(orderTypes).map(key => {
                   let type = orderTypes[key];
                   return (
-                    <MenuItem value={type}>
+                    <MenuItem value={key}>
                       {type}
                     </MenuItem>
                   )

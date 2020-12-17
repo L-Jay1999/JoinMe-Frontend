@@ -59,7 +59,7 @@ const MyRequestList = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://localhost:8080/orderrequest/orderid/' + id, {
+        fetch('http://52.250.51.146:8080/orderrequest/orderid/' + id, {
             method: 'get',
             credentials: "include"
         }).then(res => res.json())
@@ -128,7 +128,7 @@ const MyRequestList = () => {
                                                         <TableCell>
                                                             <Button color="primary" variant="contained" key={row.userId} onClick={
                                                                 () => {
-                                                                    fetch('http://localhost:8080/orderrequest/' + row.requestId + '/approve', {
+                                                                    fetch('http://52.250.51.146:8080/orderrequest/' + row.requestId + '/approve', {
                                                                         method: 'post',
                                                                         credentials: "include",
                                                                     }
@@ -138,7 +138,7 @@ const MyRequestList = () => {
                                                                                 alert('同意失败')
                                                                             else {
                                                                                 alert('同意成功')
-                                                                                fetch('http://localhost:8080/orderrequest/orderid/' + id, {
+                                                                                fetch('http://52.250.51.146:8080/orderrequest/orderid/' + id, {
                                                                                     method: 'get',
                                                                                     credentials: "include"
                                                                                 }).then(res => res.json())
@@ -156,7 +156,7 @@ const MyRequestList = () => {
                                                         </Button>
                                                             <Button color="secondary" variant="contained" key={row.userId} onClick={
                                                                 () => {
-                                                                    fetch('http://localhost:8080/orderrequest/' + row.requestId + '/deny', {
+                                                                    fetch('http://52.250.51.146:8080/orderrequest/' + row.requestId + '/deny', {
                                                                         method: 'post',
                                                                         credentials: "include",
                                                                     }
@@ -166,7 +166,7 @@ const MyRequestList = () => {
                                                                                 alert('拒绝失败')
                                                                             else {
                                                                                 alert('拒绝成功')
-                                                                                fetch('http://localhost:8080/orderrequest/orderid/' + id, {
+                                                                                fetch('http://52.250.51.146:8080/orderrequest/orderid/' + id, {
                                                                                     method: 'get',
                                                                                     credentials: "include"
                                                                                 }).then(res => res.json())
