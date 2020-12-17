@@ -40,11 +40,12 @@ const DashboardLayout = () => {
   const [userProfile, setUserProfile] = useState([]);
 
   useEffect(() => {
-    fetch('http://52.250.51.146:8080/user/', {
+    fetch('http://localhost:8080/user/', {
       method: 'get',
       credentials: "include",
     }).then(res => res.json())
       .then(data => {
+        console.log(data);
         setUser(data);
         if (data.code === 10000)
           setUserProfile(data.data);

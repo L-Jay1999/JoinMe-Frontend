@@ -119,7 +119,7 @@ const IncomeList = () => {
       setIsType(false);
     }
     else {
-      fetch('http://52.250.51.146:8080/admin/income',
+      fetch('http://localhost:8080/admin/income',
         {
           method: "POST",
           credentials: "include",

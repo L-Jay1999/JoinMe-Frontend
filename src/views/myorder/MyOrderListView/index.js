@@ -67,7 +67,7 @@ const ProductList = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://52.250.51.146:8080/order/issued', {
+        fetch('http://localhost:8080/order/issued', {
             method: 'get',
             credentials: "include"
         }).then(res => res.json())
@@ -154,7 +154,7 @@ const ProductList = () => {
                                                                 请求
                                                                 </Button>
                                                             <Button variant="contained" color="secondary" key={row.orderId} onClick={() => {
-                                                                fetch('http://52.250.51.146:8080/order/' + row.orderId, {
+                                                                fetch('http://localhost:8080/order/' + row.orderId, {
                                                                     method: 'delete',
                                                                     credentials: "include",
                                                                 }
@@ -164,7 +164,7 @@ const ProductList = () => {
                                                                             alert('删除失败')
                                                                         else {
                                                                             alert('删除成功')
-                                                                            fetch('http://52.250.51.146:8080/order/issued', {
+                                                                            fetch('http://localhost:8080/order/issued', {
                                                                                 method: 'get',
                                                                                 credentials: "include"
                                                                             }).then(res => res.json())

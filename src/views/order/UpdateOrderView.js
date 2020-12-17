@@ -44,7 +44,7 @@ const OrderDetails = ({ className, ...rest }) => {
     const [imageUrl, setUrl] = useState("");
 
     useEffect(() => {
-        fetch('http://52.250.51.146:8080/order/' + id, {
+        fetch('http://localhost:8080/order/' + id, {
             method: 'get',
             credentials: "include",
         }).then(res => res.json())
