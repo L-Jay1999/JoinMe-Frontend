@@ -74,7 +74,7 @@ const IncomeList = () => {
   const date = new Date();
 
   const [selectedCity, setSelectedCity] = useState('');
-  const [orderType, setOrderType] = useState('');
+  const [orderType, setOrderType] = useState(null);
   const [startDate, setStartDate] = useState("2020-01-01");
   const [endDate, setEndDate] = useState(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
   const [isType, setIsType] = useState(true);
@@ -146,11 +146,11 @@ const IncomeList = () => {
               income: val['income'],
               locale: val['locale'],
               orderType: orderTypes[val['orderType']],
-              number: data.__length__
+              number: data.length
             });
             tempChartData.x.push(val['date']);
             tempChartData.y.income.push(val['income']);
-            tempChartData.y.number.push(data.__length__);
+            tempChartData.y.number.push(data.length);
           });
           setTableData(temp);
           setChartData(tempChartData);

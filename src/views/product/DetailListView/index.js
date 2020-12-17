@@ -50,7 +50,7 @@ const DetailList = () => {
   //   {'orderId':'1', 'number': 10 , 'finishDate':'2018-07-05', 'fee':60 }, {'orderId':'2', 'number': 15 , 'finishDate':'2018-06-05', 'fee':80 }
   // ]
   const [selectedCity, setSelectedCity] = React.useState('');
-  const [orderType, setOrderType] = React.useState('');
+  const [orderType, setOrderType] = React.useState(null);
   const [startDate, setStartDate] = React.useState("2020-01-01");
   const [endDate, setEndDate] = React.useState(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
   const [isType, setIsType] = React.useState(true);
@@ -129,14 +129,15 @@ const DetailList = () => {
         })
         .then(res => res.json())
         .then(val => {
+          console.log(val);
           const { data } = val;
           const temp = []
           data.map((val) => {
             temp.push({
               'orderId': val.orderId,
-              'number': val.acceptUsers.__length__,
+              'number': val.acceptUsers.length,
               'finishDate': GMTToStr(val.finishDate),
-              'fee': (val.acceptUsers.__length__ * 4 + 20),
+              'fee': (val.acceptUsers.length * 4 + 20),
             })
           })
           setTableData(temp);
@@ -191,7 +192,7 @@ const DetailList = () => {
                 Object.keys(cityData).map(key => {
                   let city = cityData[key];
                   return (
-                    <MenuItem value={city}>
+                    <MenuItem value={key}>
                       {city}
                     </MenuItem>
                   )
@@ -210,7 +211,7 @@ const DetailList = () => {
                 Object.keys(orderTypes).map(key => {
                   let type = orderTypes[key];
                   return (
-                    <MenuItem value={type}>
+                    <MenuItem value={key}>
                       {type}
                     </MenuItem>
                   )
