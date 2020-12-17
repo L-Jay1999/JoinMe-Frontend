@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import {
-    Box,
-    Button,
-    ButtonBase,
     Card,
     CardContent,
     CardMedia,
     CardHeader,
     Divider,
     Grid,
-    IconButton,
     TextField,
     Typography,
     makeStyles,
@@ -22,7 +16,6 @@ import {
     MenuItem,
     FormControl
 } from '@material-ui/core';
-import { Done } from '@material-ui/icons';
 
 const useStyles = makeStyles(() => ({
     root: {}
@@ -42,18 +35,16 @@ const OrderDetails = ({ className, ...rest }) => {
         'orderState': ''
     });
     const [imageUrl, setUrl] = useState("");
-    const imageUploadUrl = 'http://localhost:8080/order/' + id + '/upload'
+    const imageUploadUrl = 'http://52.250.51.146:8080/order/' + id + '/upload'
 
     useEffect(() => {
-        fetch('http://localhost:8080/order/' + id, {
+        fetch('http://52.250.51.146:8080/order/' + id, {
             method: 'get',
             credentials: "include",
         }).then(res => res.json())
             .then(data => {
                 if (data.code === 10000) {
                     setValues(data.data);
-                    console.log(data.data);
-                    console.log(data.data.picture)
                     if (data.data.picture === null)
                         setUrl("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1812993978,4158651947&fm=26&gp=0.jpg")
                     else
@@ -94,8 +85,18 @@ const OrderDetails = ({ className, ...rest }) => {
                                 id="picture"
                             />
                             <form action={imageUploadUrl} method="post" enctype="multipart/form-data" id="imageUpload">
-                                <input type="file" name="file" />
-                                <input type="submit" value="提交" />
+                                <input type="file" id="uploadImage" name="file" />
+                                <input type="button" value="提交" onClick={
+                                    () => {
+                                        let uploadimage = document.getElementById("uploadImage")
+                                        if (uploadimage.files.length == 0)
+                                            alert("未选择文件")
+                                        else {
+                                            let form = document.getElementById("imageUpload")
+                                            form.submit()
+                                        }
+                                    }
+                                } />
                                 <input type="reset" value="清空" />
                             </form>
                         </Grid>

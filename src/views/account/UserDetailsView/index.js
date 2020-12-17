@@ -48,7 +48,7 @@ const UserTable = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:8080/admin/user', {
+    fetch('http://52.250.51.146:8080/admin/user', {
       method: 'get',
       credentials: 'include'
     }).then(res => res.json())
