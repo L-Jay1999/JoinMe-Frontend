@@ -22,7 +22,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const GenerateButton = ({data, navigate}) => {
+const GenerateButton = ({ data, navigate }) => {
   if (data !== 10000) {
     return (
       <Hidden mdDown>
@@ -45,7 +45,7 @@ const GenerateButton = ({data, navigate}) => {
       <Hidden mdDown>
         <IconButton color="inherit">
           <Button variant="contained" color="primary" onClick={() => {
-            fetch('http://localhost:8080/logout', {
+            fetch('http://52.250.51.146:8080/logout', {
               method: 'post',
               credentials: "include",
             }).then(window.location.href = '/app/products');
@@ -81,7 +81,7 @@ const TopBar = ({
           <Logo />
         </RouterLink>
         <Box flexGrow={1} />
-          <GenerateButton data={data} navigate={navigate} />
+        <GenerateButton data={data} navigate={navigate} />
         <Hidden lgUp>
           <IconButton
             color="inherit"
