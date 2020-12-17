@@ -74,7 +74,7 @@ const IncomeList = () => {
   const date = new Date();
 
   const [selectedCity, setSelectedCity] = useState('');
-  const [orderType, setOrderType] = useState('');
+  const [orderType, setOrderType] = useState(null);
   const [startDate, setStartDate] = useState("2020-01-01");
   const [endDate, setEndDate] = useState(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
   const [isType, setIsType] = useState(true);

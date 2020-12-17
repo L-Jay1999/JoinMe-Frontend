@@ -50,7 +50,7 @@ const DetailList = () => {
   //   {'orderId':'1', 'number': 10 , 'finishDate':'2018-07-05', 'fee':60 }, {'orderId':'2', 'number': 15 , 'finishDate':'2018-06-05', 'fee':80 }
   // ]
   const [selectedCity, setSelectedCity] = React.useState('');
-  const [orderType, setOrderType] = React.useState('');
+  const [orderType, setOrderType] = React.useState(null);
   const [startDate, setStartDate] = React.useState("2020-01-01");
   const [endDate, setEndDate] = React.useState(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
   const [isType, setIsType] = React.useState(true);
@@ -130,6 +130,7 @@ const DetailList = () => {
         })
         .then(res => res.json())
         .then(val => {
+          console.log(val);
           const { data } = val;
           const temp = []
           data.map((val) => {
@@ -192,7 +193,7 @@ const DetailList = () => {
                 Object.keys(cityData).map(key => {
                   let city = cityData[key];
                   return (
-                    <MenuItem value={city}>
+                    <MenuItem value={key}>
                       {city}
                     </MenuItem>
                   )
