@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import clsx from 'clsx';
 import {
+    Button,
     Card,
     CardContent,
     CardMedia,
@@ -31,8 +32,6 @@ const OrderDetails = ({ className, ...rest }) => {
         'orderName': '',
         'description': '',
         'number': '',
-        'endDate': '',
-        'orderState': ''
     });
     const [imageUrl, setUrl] = useState("");
     const imageUploadUrl = 'http://52.250.51.146:8080/order/' + id + '/upload'
@@ -105,6 +104,7 @@ const OrderDetails = ({ className, ...rest }) => {
                                 <TextField
                                     label="召集令id"
                                     name="orderId"
+                                    disabled
                                     onChange={handleChange}
                                     value={values.orderId}
                                     variant="outlined"
@@ -120,17 +120,55 @@ const OrderDetails = ({ className, ...rest }) => {
                                         <MenuItem value='Study'>我爱学习</MenuItem>
                                         <MenuItem value='SocialExperience'>社会经验</MenuItem>
                                         <MenuItem value='PublicBenefit'>人民福祉</MenuItem>
-                                        <MenuItem value='play'>玩</MenuItem>
+                                        <MenuItem value='Play'>玩</MenuItem>
                                     </Select>
                                 </FormControl>
-                                <Grid item>
-                                    <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                                        Remove
-                                    </Typography>
-                                </Grid>
-                            </Grid>
-                            <Grid item>
-                                <Typography variant="subtitle1">$19.00</Typography>
+                                <TextField
+                                    label="召集令名字"
+                                    name="orderName"
+                                    onChange={handleChange}
+                                    value={values.orderName}
+                                    variant="outlined"
+                                />
+                                <TextField
+                                    label="人数"
+                                    name="number"
+                                    onChange={handleChange}
+                                    value={values.number}
+                                    variant="outlined"
+                                />
+                                <TextField
+                                    fullWidth
+                                    label="描述"
+                                    name="description"
+                                    onChange={handleChange}
+                                    value={values.description}
+                                    variant="outlined"
+                                />
+                                <Button
+                                    color="primary"
+                                    variant="contained"
+                                    onClick={() => {
+                                        fetch('http://52.250.51.146:8080/order/' + id, {
+                                            method: 'post',
+                                            credentials: "include",
+                                            body: JSON.stringify(values),
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            },
+                                        }).then(res => res.json())
+                                            .then(data => {
+                                                console.log(data);
+                                                console.log(data.data);
+                                                if (data.code !== 10000)
+                                                    alert('更新失败');
+                                                else
+                                                    alert('更新成功')
+                                            })
+                                    }}
+                                >
+                                    更新召集令
+                            </Button>
                             </Grid>
                         </Grid>
                     </Grid>

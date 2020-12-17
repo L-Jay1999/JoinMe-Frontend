@@ -126,6 +126,13 @@ const MyRequestList = () => {
                                                 else if (column.id === 'operation')
                                                     return (
                                                         <TableCell>
+                                                            <Button color='primary' variant='contained' key={row.userId} onClick={
+                                                                () => {
+                                                                    navigate('/app/user/' + row.userId, { replace: true });
+                                                                }
+                                                            }>
+                                                                Who?
+                                                            </Button>
                                                             <Button color="primary" variant="contained" key={row.userId} onClick={
                                                                 () => {
                                                                     fetch('http://52.250.51.146:8080/orderrequest/' + row.requestId + '/approve', {
@@ -207,7 +214,7 @@ const MyRequestList = () => {
                     />
                 </Paper>
             </Container>
-        </Page>
+        </Page >
     );
 };
 

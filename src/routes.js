@@ -17,6 +17,7 @@ import MyRequestListView from 'src/views/myrequest/MyRequestListView';
 import MyOrderListView from 'src/views/myorder/MyOrderListView';
 import MyOrderRequestListView from 'src/views/myorder-request/MyOrderRequestListView';
 import UpdateOrderView from 'src/views/order/UpdateOrderView';
+import UserDetailView from 'src/views/account/UserDetailView';
 
 
 const routes = [
@@ -27,8 +28,8 @@ const routes = [
       { path: 'account', element: <AccountView /> },
       { path: 'userlist', element: <UserDetailsView /> },
       { path: 'products', element: <ProductListView /> },
-      { path: 'details', element: <DetailListView />},
-      { path: 'income', element: <IncomeListView />},
+      { path: 'details', element: <DetailListView /> },
+      { path: 'income', element: <IncomeListView /> },
       { path: 'orders/:id', element: <OrderDetailView /> },
       { path: 'accept/:id', element: <AcceptOrderView /> },
       { path: 'issue', element: <IssueOrderView /> },
@@ -36,6 +37,7 @@ const routes = [
       { path: 'myorders', element: <MyOrderListView /> },
       { path: 'myorderrequest/:id', element: <MyOrderRequestListView /> },
       { path: 'updateorder/:id', element: <UpdateOrderView /> },
+      { path: 'user/:id', element: <UserDetailView /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },
