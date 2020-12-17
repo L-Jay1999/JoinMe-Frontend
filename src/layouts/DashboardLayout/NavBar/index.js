@@ -20,7 +20,25 @@ import {
 } from 'react-feather';
 import NavItem from './NavItem';
 
-const items = [
+const adminItems = [
+  {
+    href: '/app/details',
+    icon: MapIcon,
+    title: '明细表',
+  },
+  {
+    href: '/app/income',
+    icon: ChartIcon,
+    title: '收益汇总表',
+  },
+  {
+    href: '/app/userlist',
+    icon: UserIcon,
+    title: '用户信息表',
+  },
+];
+
+const userItems = [
   {
     href: '/app/products',
     icon: ShoppingBagIcon,
@@ -41,17 +59,8 @@ const items = [
     icon: UserIcon,
     title: '用户信息'
   },
-  {
-    href: '/app/details',
-    icon: MapIcon,
-    title: '明细表',
-  },
-  {
-    href: '/app/income',
-    icon: ChartIcon,
-    title: '收益汇总表',
-  }
 ];
+
 
 const useStyles = makeStyles(() => ({
   mobileDrawer: {
@@ -69,9 +78,37 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
+const Items = ({user}) => {
+  if (user === "admin")
+    return (
+      adminItems.map((item) => (
+        <NavItem
+          href={item.href}
+          key={item.title}
+          title={item.title}
+          icon={item.icon}
+        />
+      ))
+    )
+  else {
+    return (
+      userItems.map((item) => (
+        <NavItem
+          href={item.href}
+          key={item.title}
+          title={item.title}
+          icon={item.icon}
+        />
+      ))
+    )
+  }
+
+};
+
 const NavBar = ({ onMobileClose, openMobile, user }) => {
   const classes = useStyles();
   const location = useLocation();
+  console.log(user.userName);
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
@@ -80,55 +117,7 @@ const NavBar = ({ onMobileClose, openMobile, user }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
-
-
-
-  const content = (
-    <Box
-      height="100%"
-      display="flex"
-      flexDirection="column"
-    >
-      <Box
-        alignItems="center"
-        display="flex"
-        flexDirection="column"
-        p={2}
-      >
-        <Avatar
-          className={classes.avatar}
-          component={RouterLink}
-          // src={user.avatar}
-          to="/app/account"
-        />
-
-        <Typography
-          className={classes.name}
-          color="textPrimary"
-          variant="h5"
-          style={{ padding: 10 }}
-        >
-          {user.userName}
-        </Typography>
-
-      </Box>
-      <Divider />
-      <Box p={2}>
-        <List>
-          {items.map((item) => (
-            <NavItem
-              href={item.href}
-              key={item.title}
-              title={item.title}
-              icon={item.icon}
-            />
-          ))}
-        </List>
-      </Box>
-      <Box flexGrow={1} />
-    </Box>
-  );
-
+  console.log(user);
   return (
     <>
       <Hidden lgUp>
@@ -139,7 +128,7 @@ const NavBar = ({ onMobileClose, openMobile, user }) => {
           open={openMobile}
           variant="temporary"
         >
-          {content}
+
         </Drawer>
       </Hidden>
       <Hidden mdDown>
@@ -149,7 +138,43 @@ const NavBar = ({ onMobileClose, openMobile, user }) => {
           open
           variant="persistent"
         >
-          {content}
+          <Box
+            height="100%"
+            display="flex"
+            flexDirection="column"
+          >
+            <Box
+              alignItems="center"
+              display="flex"
+              flexDirection="column"
+              p={2}
+            >
+              <Avatar
+                className={classes.avatar}
+                component={RouterLink}
+                // src={user.avatar}
+                to="/app/account"
+              />
+
+              <Typography
+                className={classes.name}
+                color="textPrimary"
+                variant="h5"
+                style={{ padding: 10 }}
+              >
+                {user.userName}
+              </Typography>
+
+            </Box>
+            <Divider />
+            <Box p={2}>
+              <List>
+                <Items user={user.userName} />
+              </List>
+              {/* {console.log(user)}; */}
+            </Box>
+            <Box flexGrow={1} />
+          </Box>
         </Drawer>
       </Hidden>
     </>
