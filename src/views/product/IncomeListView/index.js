@@ -46,10 +46,6 @@ const columns = [
     dataIndex: 'date',
   },
   {
-    title: '地域',
-    dataIndex: 'locale',
-  },
-  {
     title: '召集类型',
     dataIndex: 'orderType',
   },
@@ -159,7 +155,6 @@ const IncomeList = () => {
               key: index,
               date: GMTToStr(val['date']),
               income: val['income'],
-              locale: val['locale'],
               orderType: orderTypes[val['orderType']],
               number: data.length
             });
