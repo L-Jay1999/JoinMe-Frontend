@@ -130,6 +130,13 @@ const MyRequestList = () => {
                                                             }}>
                                                                 查看召集令
                                                                 </Button>
+                                                            <Button color='primary' variant="contained" key={row.requestId} onClick={
+                                                                () => {
+                                                                    navigate('/app/updaterequest/' + row.requestId, { replace: true });
+                                                                }
+                                                            }>
+                                                                修改
+                                                            </Button>
                                                             <Button color="secondary" variant="contained" key={row.requestId} onClick={
                                                                 () => {
                                                                     fetch('http://52.250.51.146:8080/orderrequest/' + row.requestId, {

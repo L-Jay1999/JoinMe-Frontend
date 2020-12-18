@@ -18,6 +18,7 @@ import MyOrderListView from 'src/views/myorder/MyOrderListView';
 import MyOrderRequestListView from 'src/views/myorder-request/MyOrderRequestListView';
 import UpdateOrderView from 'src/views/order/UpdateOrderView';
 import UserDetailView from 'src/views/account/UserDetailView';
+import UpdateRequestView from 'src/views/myrequest/UpdateRequestView';
 
 
 const routes = [
@@ -38,6 +39,7 @@ const routes = [
       { path: 'myorderrequest/:id', element: <MyOrderRequestListView /> },
       { path: 'updateorder/:id', element: <UpdateOrderView /> },
       { path: 'user/:id', element: <UserDetailView /> },
+      { path: 'updaterequest/:id', element: <UpdateRequestView /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },
