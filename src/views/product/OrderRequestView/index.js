@@ -6,7 +6,7 @@ import {
     Button,
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-import { Table } from 'antd';
+import { Table, Modal } from 'antd';
 import 'antd/dist/antd.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -56,7 +56,6 @@ const OrderRequest = () => {
                     '用户姓名': data.userName,
                     '用户ID': data.userId,
                     '用户联系方式': data.phoneNumber,
-                    '用户注册日期': GMTToStr(data.regitsterDate),
                     '用户介绍': data.introduction
                 });
                 setIsModalVisible(true);
@@ -93,9 +92,9 @@ const OrderRequest = () => {
             dataIndex: 'check',
             key: 'check',
             render: (text, record) => {
-                <Button color="primary" onClick={() => handleCheck(record.userId)}>
+                return (<Button color="primary" onClick={() => { handleCheck(record.userId) }}>
                     查看令主信息
-                </Button>
+                </Button>)
             }
         }
     ]
@@ -113,7 +112,7 @@ const OrderRequest = () => {
                         requestId: val.requestId,
                         userId: val.userId,
                         requestState: val.requestState,
-                        createDate: val.createDate
+                        createDate: GMTToStr(val.createDate)
                     })
                 });
                 setTableData(temp);

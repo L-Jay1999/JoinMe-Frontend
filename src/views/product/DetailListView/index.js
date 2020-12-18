@@ -78,7 +78,7 @@ const DetailList = () => {
           '用户姓名': data.userName,
           '用户ID': data.userId,
           '用户联系方式': data.phoneNumber,
-          '用户注册日期': GMTToStr(data.regitsterDate),
+          // '用户注册日期': data.regitsterDate,
           '用户介绍': data.introduction
         });
         setIsModalVisible(true);
@@ -87,6 +87,8 @@ const DetailList = () => {
         console.log(err);
         alert('查询失败，请重试！');
       })
+    console.log(userInfo);
+
   }
 
   const handleModal = () => {
@@ -123,9 +125,9 @@ const DetailList = () => {
       title: '查看令主信息',
       key: 'check',
       render: (text, record) => {
-        <Button color="primary" onClick={() => handleCheck(record.userId)}>
+        return (<Button color="primary" onClick={() => { handleCheck(record.userId) }}>
           查看令主信息
-        </Button>
+        </Button>)
       }
     }
   ]
@@ -157,7 +159,6 @@ const DetailList = () => {
       setIsType(false);
     }
     else {
-      alert(orderType);
       console.log(orderType);
       fetch('http://52.250.51.146:8080/admin/detail',
         {
