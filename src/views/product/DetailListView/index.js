@@ -13,7 +13,7 @@ import {
   InputLabel
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-import { Table } from 'antd';
+import { Table, Modal } from 'antd';
 import 'antd/dist/antd.css';
 import cityData from '../city.json';
 
@@ -49,28 +49,84 @@ const DetailList = () => {
   // const tableData = [
   //   {'orderId':'1', 'number': 10 , 'finishDate':'2018-07-05', 'fee':60 }, {'orderId':'2', 'number': 15 , 'finishDate':'2018-06-05', 'fee':80 }
   // ]
-  const [selectedCity, setSelectedCity] = React.useState('');
-  const [orderType, setOrderType] = React.useState(null);
-  const [startDate, setStartDate] = React.useState("2020-01-01");
-  const [endDate, setEndDate] = React.useState(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
-  const [isType, setIsType] = React.useState(true);
+  const [selectedCity, setSelectedCity] = useState('');
+  const [orderType, setOrderType] = useState(null);
+  const [startDate, setStartDate] = useState("2020-01-01");
+  const [endDate, setEndDate] = useState(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
+  const [isType, setIsType] = useState(true);
+  const [userInfo, setUserInfo] = useState({});
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const GMTToStr = (time) => {
+    const date = new Date(time);
+    const Str = date.getFullYear() + '-' +
+      (date.getMonth() + 1) + '-' +
+      date.getDate() + ' ' +
+      date.getHours() + ':' +
+      date.getMinutes() + ':' +
+      date.getSeconds();
+    return Str;
+  }
+
+  const handleCheck = (id) => {
+    fetch('http://52.250.51.146:8080/admin/user/' + id, { method: 'GET', credentials: "include" })
+      .then(res => res.json())
+      .then(val => {
+        console.log(val);
+        const { data } = val;
+        setUserInfo({
+          '用户姓名': data.userName,
+          '用户ID': data.userId,
+          '用户联系方式': data.phoneNumber,
+          '用户注册日期': GMTToStr(data.regitsterDate),
+          '用户介绍': data.introduction
+        });
+        setIsModalVisible(true);
+      })
+      .catch(err => {
+        console.log(err);
+        alert('查询失败，请重试！');
+      })
+  }
+
+  const handleModal = () => {
+    setIsModalVisible(false);
+  }
 
   const columns = [
     {
       title: '召集令号',
       dataIndex: 'orderId',
+      key: 'orderId',
     },
     {
       title: '召集人数',
       dataIndex: 'number',
+      key: 'number',
+    },
+    {
+      title: '令主ID',
+      dataIndex: 'userId',
+      key: 'userId',
     },
     {
       title: '达成日期',
       dataIndex: 'finishDate',
+      key: 'finishDate',
     },
     {
       title: '中介费',
-      dataIndex: 'fee'
+      dataIndex: 'fee',
+      key: 'fee',
+    },
+    {
+      title: '查看令主信息',
+      key: 'check',
+      render: (text, record) => {
+        <Button color="primary" onClick={() => handleCheck(record.userId)}>
+          查看令主信息
+        </Button>
+      }
     }
   ]
 
@@ -94,17 +150,6 @@ const DetailList = () => {
   const handleOrderType = (e) => {
     setOrderType(e.target.value);
     setIsType(true);
-  }
-
-  const GMTToStr = (time) => {
-    const date = new Date(time);
-    const Str = date.getFullYear() + '-' +
-      (date.getMonth() + 1) + '-' +
-      date.getDate() + ' ' +
-      date.getHours() + ':' +
-      date.getMinutes() + ':' +
-      date.getSeconds();
-    return Str;
   }
 
   const handleClick = () => {
@@ -135,10 +180,12 @@ const DetailList = () => {
           const temp = []
           data.map((val) => {
             temp.push({
-              'orderId': val.orderId,
-              'number': val.acceptUsers.length,
-              'finishDate': GMTToStr(val.finishDate),
-              'fee': (val.acceptUsers.length * 4 + 20),
+              key: val.detailId,
+              userId: val.userId,
+              orderId: val.orderId,
+              number: val.acceptUsers.length,
+              finishDate: GMTToStr(val.finishDate),
+              fee: (val.acceptUsers.length * 4),
             })
           })
           setTableData(temp);
@@ -234,6 +281,13 @@ const DetailList = () => {
           />
         </Paper>
       </Container>
+      <Modal title="令主信息" visible={isModalVisible} onOk={handleModal} onCancel={handleModal}>
+        {
+          Object.keys(userInfo).map(key =>
+            (<p>{key}：{userInfo[key]}</p>)
+          )
+        }
+      </Modal>
     </Page>
   );
 };

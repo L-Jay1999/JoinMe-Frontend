@@ -17,6 +17,7 @@ import {
   User as UserIcon,
   Map as MapIcon,
   BarChart as ChartIcon,
+  Book as BookIcon,
 } from 'react-feather';
 import NavItem from './NavItem';
 
@@ -35,6 +36,11 @@ const adminItems = [
     href: '/app/userlist',
     icon: UserIcon,
     title: '用户信息表',
+  },
+  {
+    href: '/app/adminOrderRequest',
+    icon: BookIcon,
+    title: '请求信息表',
   },
 ];
 
@@ -78,7 +84,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Items = ({user}) => {
+const Items = ({ user }) => {
   if (user === "admin")
     return (
       adminItems.map((item) => (

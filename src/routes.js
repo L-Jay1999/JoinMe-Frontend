@@ -9,6 +9,7 @@ import NotFoundView from 'src/views/errors/NotFoundView';
 import ProductListView from 'src/views/product/ProductListView';
 import DetailListView from 'src/views/product/DetailListView';
 import IncomeListView from 'src/views/product/IncomeListView';
+import AdminOrderRequestView from 'src/views/product/OrderRequestView';
 import RegisterView from 'src/views/auth/RegisterView';
 import OrderDetailView from 'src/views/order/OrderDetailView';
 import IssueOrderView from 'src/views/order/IssueOrderView';
@@ -31,6 +32,7 @@ const routes = [
       { path: 'products', element: <ProductListView /> },
       { path: 'details', element: <DetailListView /> },
       { path: 'income', element: <IncomeListView /> },
+      { path: 'adminOrderRequest', element: <AdminOrderRequestView /> },
       { path: 'orders/:id', element: <OrderDetailView /> },
       { path: 'accept/:id', element: <AcceptOrderView /> },
       { path: 'issue', element: <IssueOrderView /> },
