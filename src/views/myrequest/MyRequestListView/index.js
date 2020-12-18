@@ -132,7 +132,10 @@ const MyRequestList = () => {
                                                                 </Button>
                                                             <Button color='primary' variant="contained" key={row.requestId} onClick={
                                                                 () => {
-                                                                    navigate('/app/updaterequest/' + row.requestId, { replace: true });
+                                                                    if (row.requestState === 'UnReady')
+                                                                        navigate('/app/updaterequest/' + row.requestId, { replace: true });
+                                                                    else
+                                                                        alert('不能改了')
                                                                 }
                                                             }>
                                                                 修改
