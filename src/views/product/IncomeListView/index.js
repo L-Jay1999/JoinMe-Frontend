@@ -114,6 +114,17 @@ const IncomeList = () => {
     setIsType(true);
   }
 
+  const GMTToStr = (time) => {
+    const date = new Date(time);
+    const Str = date.getFullYear() + '-' +
+      (date.getMonth() + 1) + '-' +
+      date.getDate() + ' ' +
+      date.getHours() + ':' +
+      date.getMinutes() + ':' +
+      date.getSeconds();
+    return Str;
+  }
+
   const handleClick = () => {
     if (!orderType) {
       setIsType(false);
@@ -146,13 +157,13 @@ const IncomeList = () => {
           data.map((val, index) => {
             temp.push({
               key: index,
-              date: val['date'],
+              date: GMTToStr(val['date']),
               income: val['income'],
               locale: val['locale'],
               orderType: orderTypes[val['orderType']],
               number: data.length
             });
-            tempChartData.x.push(val['date']);
+            tempChartData.x.push(GMTToStr(val['date']));
             tempChartData.y.income.push(val['income']);
             tempChartData.y.number.push(data.length);
           });
