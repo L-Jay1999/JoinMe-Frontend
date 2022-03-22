@@ -69,7 +69,7 @@ const DetailList = () => {
   }
 
   const handleCheck = (id) => {
-    fetch('http://52.250.51.146:8080/admin/user/' + id, { method: 'GET', credentials: "include" })
+    fetch('http://localhost:8080/admin/user/' + id, { method: 'GET', credentials: "include" })
       .then(res => res.json())
       .then(val => {
         console.log(val);
@@ -160,7 +160,7 @@ const DetailList = () => {
     }
     else {
       console.log(orderType);
-      fetch('http://52.250.51.146:8080/admin/detail',
+      fetch('http://localhost:8080/admin/detail',
         {
           method: "POST",
           credentials: "include",
@@ -271,7 +271,7 @@ const DetailList = () => {
           </FormControl>
           <Button className={classes.Button} variant="contained" color="primary" onClick={handleClick}>
             查询
-        </Button>
+          </Button>
         </Box>
         <br />
         <Paper >

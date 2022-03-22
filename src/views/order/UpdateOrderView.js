@@ -34,10 +34,10 @@ const OrderDetails = ({ className, ...rest }) => {
         'number': '',
     });
     const [imageUrl, setUrl] = useState("");
-    const imageUploadUrl = 'http://52.250.51.146:8080/order/' + id + '/upload'
+    const imageUploadUrl = 'http://localhost:8080/order/' + id + '/upload'
 
     useEffect(() => {
-        fetch('http://52.250.51.146:8080/order/' + id, {
+        fetch('http://localhost:8080/order/' + id, {
             method: 'get',
             credentials: "include",
         }).then(res => res.json())
@@ -149,7 +149,7 @@ const OrderDetails = ({ className, ...rest }) => {
                                     color="primary"
                                     variant="contained"
                                     onClick={() => {
-                                        fetch('http://52.250.51.146:8080/order/' + id, {
+                                        fetch('http://localhost:8080/order/' + id, {
                                             method: 'post',
                                             credentials: "include",
                                             body: JSON.stringify(values),
@@ -168,7 +168,7 @@ const OrderDetails = ({ className, ...rest }) => {
                                     }}
                                 >
                                     更新召集令
-                            </Button>
+                                </Button>
                             </Grid>
                         </Grid>
                     </Grid>

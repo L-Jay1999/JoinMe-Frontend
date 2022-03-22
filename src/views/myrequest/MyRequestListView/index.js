@@ -57,7 +57,7 @@ const MyRequestList = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://52.250.51.146:8080/orderrequest/', {
+        fetch('http://localhost:8080/orderrequest/', {
             method: 'get',
             credentials: "include"
         }).then(res => res.json())
@@ -129,7 +129,7 @@ const MyRequestList = () => {
                                                                 navigate('/app/orders/' + row.orderId, { replace: true });
                                                             }}>
                                                                 查看召集令
-                                                                </Button>
+                                                            </Button>
                                                             <Button color='primary' variant="contained" key={row.requestId} onClick={
                                                                 () => {
                                                                     if (row.requestState === 'UnReady')
@@ -142,7 +142,7 @@ const MyRequestList = () => {
                                                             </Button>
                                                             <Button color="secondary" variant="contained" key={row.requestId} onClick={
                                                                 () => {
-                                                                    fetch('http://52.250.51.146:8080/orderrequest/' + row.requestId, {
+                                                                    fetch('http://localhost:8080/orderrequest/' + row.requestId, {
                                                                         method: 'delete',
                                                                         credentials: "include",
                                                                     }
@@ -152,7 +152,7 @@ const MyRequestList = () => {
                                                                                 alert('删除失败')
                                                                             else {
                                                                                 alert('删除成功')
-                                                                                fetch('http://52.250.51.146:8080/orderrequest/', {
+                                                                                fetch('http://localhost:8080/orderrequest/', {
                                                                                     method: 'get',
                                                                                     credentials: "include"
                                                                                 }).then(res => res.json())

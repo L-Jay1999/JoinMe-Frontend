@@ -47,7 +47,7 @@ const OrderRequest = () => {
     }
 
     const handleCheck = (id) => {
-        fetch('http://52.250.51.146:8080/admin/user/' + id, { method: 'GET', credentials: "include" })
+        fetch('http://localhost:8080/admin/user/' + id, { method: 'GET', credentials: "include" })
             .then(res => res.json())
             .then(val => {
                 console.log(val);
@@ -100,7 +100,7 @@ const OrderRequest = () => {
     ]
 
     useEffect(() => {
-        fetch('http://52.250.51.146:8080/admin/orderrequest', { method: "GET", credentials: "include" })
+        fetch('http://localhost:8080/admin/orderrequest', { method: "GET", credentials: "include" })
             .then(res => res.json())
             .then(val => {
                 console.log(val);

@@ -35,7 +35,7 @@ const ProfileDetails = ({ className, ...rest }) => {
     const [password, setPassword] = useState('')
 
     useEffect(() => {
-        fetch('http://52.250.51.146:8080/user/' + id, {
+        fetch('http://localhost:8080/user/' + id, {
             method: 'get',
             credentials: "include",
         }).then(res => res.json())

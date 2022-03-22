@@ -34,7 +34,7 @@ const AcceptOrderView = ({ className, ...rest }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://52.250.51.146:8080/orderrequest/' + id, {
+    fetch('http://localhost:8080/orderrequest/' + id, {
       method: 'get',
       credentials: "include",
     }).then(res => res.json())
@@ -89,7 +89,7 @@ const AcceptOrderView = ({ className, ...rest }) => {
                     color="primary"
                     variant="contained"
                     onClick={() => {
-                      fetch('http://52.250.51.146:8080/orderrequest/' + id, {
+                      fetch('http://localhost:8080/orderrequest/' + id, {
                         method: 'post',
                         credentials: "include",
                         body: JSON.stringify(values),
@@ -109,7 +109,7 @@ const AcceptOrderView = ({ className, ...rest }) => {
                     }}
                   >
                     更新请求
-                </Button>
+                  </Button>
                 </Grid>
               </Grid>
             </CardContent>

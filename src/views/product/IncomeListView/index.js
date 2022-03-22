@@ -130,7 +130,7 @@ const IncomeList = () => {
       console.log(endDate)
       console.log(selectedCity)
       console.log(orderType)
-      fetch('http://52.250.51.146:8080/admin/income',
+      fetch('http://localhost:8080/admin/income',
         {
           method: "POST",
           credentials: "include",
@@ -251,7 +251,7 @@ const IncomeList = () => {
             </FormControl>
             <Button className={classes.Button} variant="contained" color="primary" onClick={handleClick}>
               查询
-        </Button>
+            </Button>
           </Box>
           <br />
           <Paper >
