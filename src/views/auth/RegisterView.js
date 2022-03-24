@@ -58,26 +58,27 @@ const RegisterView = () => {
             }}
             validationSchema={
               Yup.object().shape({
-                cardNumber: Yup.string().max(20).required('证件号不能为空'),
-                userName: Yup.string().max(255).required('用户名不能为空'),
-                realName: Yup.string().max(255).required('姓名不能为空'),
-                password: Yup.string().max(255).required('密码不能为空'),
-                phoneNumber: Yup.string().max(12).required('手机号码不能为空'),
-                cardType: Yup.string().required('证件类型不能为空')
+                // cardNumber: Yup.string().max(20).required('证件号不能为空'),
+                userName: Yup.string().max(255).required('Username empty'),
+                realName: Yup.string().max(255).required('Name empty'),
+                password: Yup.string().max(255).required('Password empty'),
+                phoneNumber: Yup.string().max(12).required('Phone empty'),
+                // cardType: Yup.string().required('证件类型不能为空')
               })
             }
-            validate={values => {
-              let errors = {};
-              if (!/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9].*?[0-9]).{6,}$/.test(values.password))
-                errors.password = '密码至少包含大写字母，小写字母，2个数字，且不少于6位';
-              if (!/^[1][3,4,5,7,8][0-9]{9}$/.test(values.phoneNumber))
-                errors.phoneNumber = '请填写正确形式的手机号码';
-              return errors;
-            }}
+            // validate={values => {
+            // let errors = {};
+            // if (!/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9].*?[0-9]).{6,}$/.test(values.password))
+            // errors.password = '密码至少包含大写字母，小写字母，2个数字，且不少于6位';
+            // if (!/^[1][3,4,5,7,8][0-9]{9}$/.test(values.phoneNumber))
+            //   errors.phoneNumber = '请填写正确形式的Phone';
+            // return errors;
+            // }}
 
             onSubmit={(values) => {
-              values.cardType = values.cardType === '身份证' ? 'Identity' : 'Passport';
-              console.log(values);
+              values.cardType = 'Identity';
+              // values.cardType = values.cardType === '身份证' ? 'Identity' : 'Passport';
+              // console.log(values);
               fetch('http://localhost:8080/user/create', {
                 method: 'post',
                 credentials: "include",
@@ -92,7 +93,7 @@ const RegisterView = () => {
                     navigate('/login', { replace: true });
                   }
                   else
-                    alert("用户名已存在");
+                    alert("User already exist!");
                 });
             }}
           >
@@ -112,7 +113,7 @@ const RegisterView = () => {
                     variant="h2"
                     align="center"
                   >
-                    注册
+                    Register
                   </Typography>
 
                 </Box>
@@ -120,7 +121,7 @@ const RegisterView = () => {
                   error={Boolean(touched.userName && errors.userName)}
                   fullWidth
                   helperText={touched.userName && errors.userName}
-                  label="用户名"
+                  label="Username"
                   margin="normal"
                   name="userName"
                   onBlur={handleBlur}
@@ -133,7 +134,7 @@ const RegisterView = () => {
                   error={Boolean(touched.password && errors.password)}
                   helperText={touched.password && errors.password}
                   fullWidth
-                  label="密码"
+                  label="Password"
                   margin="normal"
                   name="password"
                   onBlur={handleBlur}
@@ -147,7 +148,7 @@ const RegisterView = () => {
                   error={Boolean(touched.realName && errors.realName)}
                   fullWidth
                   helperText={touched.realName && errors.realName}
-                  label="姓名"
+                  label="Name"
                   margin="normal"
                   name="realName"
                   onBlur={handleBlur}
@@ -156,7 +157,7 @@ const RegisterView = () => {
                   variant="outlined"
                 />
 
-                <Box mt={2} mb={0.5}>
+                {/* <Box mt={2} mb={0.5}>
                   <FormControl variant="outlined" fullWidth className={classes.formControl}>
                     <InputLabel id="demo-simple-select-outlined-label">证件类型</InputLabel>
                     <Select
@@ -177,37 +178,6 @@ const RegisterView = () => {
                 </Box>
 
 
-                {/* <TextField
-                  error={Boolean(touched.cardType && errors.cardType)}
-                  helperText={touched.cardType && errors.cardType}
-                fullWidth
-                label="证件类型"
-                name="cardType"
-                onChange={handleChange}
-                SelectProps={{ native: true }}
-                value={values.cardType}
-                variant="outlined"
-              >
-                  <option
-                    key='None'
-                    value=''
-                  >无</option>
-
-                  <option
-                    key='身份证'
-                    value='身份证'
-                  >
-                    身份证
-                  </option>
-                  <option
-                    key='护照'
-                    value='护照'
-                  >
-                    护照
-                  </option>
-              </TextField> */}
-
-
                 <TextField
                   error={Boolean(touched.cardNumber && errors.cardNumber)}
                   fullWidth
@@ -219,13 +189,13 @@ const RegisterView = () => {
                   onChange={handleChange}
                   value={values.cardNumber}
                   variant="outlined"
-                />
+                /> */}
 
                 <TextField
                   error={Boolean(touched.phoneNumber && errors.phoneNumber)}
                   fullWidth
                   helperText={touched.phoneNumber && errors.phoneNumber}
-                  label="手机号"
+                  label="Phone"
                   margin="normal"
                   name="phoneNumber"
                   onBlur={handleBlur}
@@ -234,18 +204,18 @@ const RegisterView = () => {
                   variant="outlined"
                 />
 
-                <TextField
+                {/* <TextField
                   error={Boolean(touched.introduction && errors.introduction)}
                   fullWidth
                   helperText={touched.introduction && errors.introduction}
-                  label="用户简介"
+                  label=""
                   margin="normal"
                   name="introduction"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.introduction}
                   variant="outlined"
-                />
+                /> */}
 
                 <Box my={2}>
                   <Button
@@ -256,21 +226,21 @@ const RegisterView = () => {
                     type="submit"
                     variant="contained"
                   >
-                    注册
+                    Sign up
                   </Button>
                 </Box>
                 <Typography
                   color="textSecondary"
                   variant="body1"
                 >
-                  已经有账号？
+                  Already sign up?
                   {' '}
                   <Link
                     component={RouterLink}
                     to="/login"
                     variant="h6"
                   >
-                    登录
+                    Sign in
                   </Link>
                 </Typography>
               </form>

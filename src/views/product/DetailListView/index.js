@@ -33,11 +33,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const orderTypes = {
-  'Technology': "技术交流",
-  'Study': '学业探讨',
-  'SocialExperience': '社会实践',
-  'PublicBenefit': '公益志愿',
-  'Play': '游玩'
+  'Technology': "Technology",
+  'Study': 'Study',
+  'SocialExperience': 'Social Practice',
+  'PublicBenefit': 'Volunteer',
+  'Play': 'Play'
 }
 
 
@@ -75,11 +75,11 @@ const DetailList = () => {
         console.log(val);
         const { data } = val;
         setUserInfo({
-          '用户姓名': data.userName,
-          '用户ID': data.userId,
-          '用户联系方式': data.phoneNumber,
+          'Name': data.userName,
+          'User ID': data.userId,
+          'Contact Number': data.phoneNumber,
           // '用户注册日期': data.regitsterDate,
-          '用户介绍': data.introduction
+          'Account Information': data.introduction
         });
         setIsModalVisible(true);
       })
@@ -97,36 +97,36 @@ const DetailList = () => {
 
   const columns = [
     {
-      title: '召集令号',
+      title: 'Activity Number',
       dataIndex: 'orderId',
       key: 'orderId',
     },
     {
-      title: '召集人数',
+      title: 'Number of People',
       dataIndex: 'number',
       key: 'number',
     },
     {
-      title: '令主ID',
+      title: 'Creator ID',
       dataIndex: 'userId',
       key: 'userId',
     },
     {
-      title: '达成日期',
+      title: 'Finished Date',
       dataIndex: 'finishDate',
       key: 'finishDate',
     },
     {
-      title: '中介费',
+      title: 'Fee',
       dataIndex: 'fee',
       key: 'fee',
     },
     {
-      title: '查看令主信息',
+      title: 'Check creator information',
       key: 'check',
       render: (text, record) => {
         return (<Button color="primary" onClick={() => { handleCheck(record.userId) }}>
-          查看令主信息
+          Check creator information
         </Button>)
       }
     }
@@ -210,7 +210,7 @@ const DetailList = () => {
         >
           <TextField
             id="startDate"
-            label="请选择起始时间"
+            label="Start Date"
             type="date"
             defaultValue="2020-01-01"
             className={classes.textField}
@@ -221,7 +221,7 @@ const DetailList = () => {
           />
           <TextField
             id="endDate"
-            label="请选择终止时间"
+            label="End Date"
             type="date"
             defaultValue={endDate}
             className={classes.textField}
@@ -230,8 +230,8 @@ const DetailList = () => {
             }}
             onChange={handleDate}
           />
-          <FormControl variant="outlined" className={classes.formControl} >
-            <InputLabel>请选择城市</InputLabel>
+          {/* <FormControl variant="outlined" className={classes.formControl} >
+            <InputLabel>City</InputLabel>
             <Select
               id="selectedCity"
               value={selectedCity}
@@ -248,9 +248,9 @@ const DetailList = () => {
                 })
               }
             </Select>
-          </FormControl>
+          </FormControl> */}
           <FormControl variant="outlined" className={classes.formControl} error={!isType}>
-            <InputLabel>请选择信令类型</InputLabel>
+            <InputLabel>Activity Type</InputLabel>
             <Select
               id="orderType"
               value={orderType}
@@ -267,10 +267,10 @@ const DetailList = () => {
                 })
               }
             </Select>
-            {isType || <FormHelperText>需选择信令类型</FormHelperText>}
+            {isType || <FormHelperText>Need to choose one</FormHelperText>}
           </FormControl>
           <Button className={classes.Button} variant="contained" color="primary" onClick={handleClick}>
-            查询
+            Search
           </Button>
         </Box>
         <br />
@@ -282,7 +282,7 @@ const DetailList = () => {
           />
         </Paper>
       </Container>
-      <Modal title="令主信息" visible={isModalVisible} onOk={handleModal} onCancel={handleModal}>
+      <Modal title="Creator Information" visible={isModalVisible} onOk={handleModal} onCancel={handleModal}>
         {
           Object.keys(userInfo).map(key =>
             (<p>{key}：{userInfo[key]}</p>)

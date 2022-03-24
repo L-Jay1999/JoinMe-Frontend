@@ -45,7 +45,7 @@ const Toolbar = ({ className, filterText, onFilterTextChange, ...rest }) => {
           variant="contained"
           onClick={() => { navigate('/app/issue', { replace: true }); }}
         >
-          添加召集令
+          Add activity
         </Button>
       </Box>
       <Box mt={3}>
@@ -66,7 +66,7 @@ const Toolbar = ({ className, filterText, onFilterTextChange, ...rest }) => {
                     </InputAdornment>
                   )
                 }}
-                placeholder="用户"
+                placeholder="User"
                 variant="outlined"
                 onChange={handleFilterTextChange}
               />

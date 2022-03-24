@@ -63,7 +63,7 @@ const LoginView = () => {
                     // window.location.href = '/app/dashboard';
                     navigate('/app/products', { replace: true });
                   else
-                    alert("用户名或密码错误");
+                    alert("Wrong username or password");
                 });
             }}
           >
@@ -83,7 +83,7 @@ const LoginView = () => {
                     variant="h2"
                     align="center"
                   >
-                    登录
+                    Login
                   </Typography>
                 </Box>
                 <Box
@@ -95,7 +95,7 @@ const LoginView = () => {
                   error={Boolean(touched.username && errors.username)}
                   fullWidth
                   helperText={touched.username && errors.username}
-                  label="用户名"
+                  label="Username"
                   margin="normal"
                   name="username"
                   onBlur={handleBlur}
@@ -108,7 +108,7 @@ const LoginView = () => {
                   error={Boolean(touched.password && errors.password)}
                   fullWidth
                   helperText={touched.password && errors.password}
-                  label="密码"
+                  label="Password"
                   margin="normal"
                   name="password"
                   onBlur={handleBlur}
@@ -126,21 +126,21 @@ const LoginView = () => {
                     type="submit"
                     variant="contained"
                   >
-                    登录
+                    Login
                   </Button>
                 </Box>
                 <Typography
                   color="textSecondary"
                   variant="body1"
                 >
-                  还没有账号？
+                  No account?
                   {' '}
                   <Link
                     component={RouterLink}
                     to="/register"
                     variant="h6"
                   >
-                    注册
+                    Register
                   </Link>
                 </Typography>
               </form>

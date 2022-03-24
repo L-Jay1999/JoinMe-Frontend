@@ -63,7 +63,7 @@ const ProfileDetails = ({ className, ...rest }) => {
         >
             <Card>
                 <CardHeader
-                    title="用户信息"
+                    title="Account Information"
                 />
                 <Divider />
                 <CardContent>
@@ -79,7 +79,7 @@ const ProfileDetails = ({ className, ...rest }) => {
                             <TextField
                                 disabled
                                 fullWidth
-                                label="用户名"
+                                label="User name"
                                 name="userName"
                                 onChange={handleChange}
                                 required
@@ -95,7 +95,7 @@ const ProfileDetails = ({ className, ...rest }) => {
                             <TextField
                                 fullWidth
                                 disabled
-                                label="姓名"
+                                label="Name"
                                 name="realName"
                                 onChange={handleChange}
                                 required
@@ -127,7 +127,7 @@ const ProfileDetails = ({ className, ...rest }) => {
                             <TextField
                                 fullWidth
                                 disabled
-                                label="用户描述"
+                                label="User Introduction"
                                 name="introduction"
                                 onChange={handleChange}
                                 value={values.introduction}

@@ -29,14 +29,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const columns = [
-  { id: 'userId', label: '用户编号' },
-  { id: 'userName', label: '用户名' },
-  { id: 'realName', label: '用户姓名' },
-  { id: 'phoneNumber', label: '手机号码' },
-  { id: 'cardType', label: '证件类型' },
-  { id: 'cardNumber', label: '证件号' },
-  { id: 'levelType', label: '用户级别' },
-  { id: 'city', label: '注册城市' },
+  { id: 'userId', label: 'User ID' },
+  { id: 'userName', label: 'User name' },
+  { id: 'realName', label: 'Name' },
+  { id: 'phoneNumber', label: 'Phone' },
+  // { id: 'cardType', label: '证件类型' },
+  // { id: 'cardNumber', label: '证件号' },
+  { id: 'levelType', label: 'Level' },
+  // { id: 'city', label: '注册城市' },
 ];
 
 const UserTable = () => {

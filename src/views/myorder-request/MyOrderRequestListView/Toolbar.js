@@ -58,7 +58,7 @@ const Toolbar = ({ className, filterText, onFilterTextChange, ...rest }) => {
                                         </InputAdornment>
                                     )
                                 }}
-                                placeholder="搜索请求"
+                                placeholder="Search Requests"
                                 variant="outlined"
                                 onChange={handleFilterTextChange}
                             />

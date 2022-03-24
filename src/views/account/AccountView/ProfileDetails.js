@@ -67,7 +67,7 @@ const ProfileDetails = ({ className, ...rest }) => {
     >
       <Card>
         <CardHeader
-          title="用户信息"
+          title="Account Information"
         />
         <Divider />
         <CardContent>
@@ -83,7 +83,7 @@ const ProfileDetails = ({ className, ...rest }) => {
               <TextField
                 disabled
                 fullWidth
-                label="用户名"
+                label="User name"
                 name="userName"
                 onChange={handleChange}
                 required
@@ -99,7 +99,7 @@ const ProfileDetails = ({ className, ...rest }) => {
               <TextField
                 fullWidth
                 disabled
-                label="姓名"
+                label="Name"
                 name="realName"
                 onChange={handleChange}
                 required
@@ -107,7 +107,7 @@ const ProfileDetails = ({ className, ...rest }) => {
                 variant="outlined"
               />
             </Grid>
-            <Grid
+            {/* <Grid
               item
               md={4}
               cs={12}>
@@ -123,8 +123,8 @@ const ProfileDetails = ({ className, ...rest }) => {
                   <MenuItem value='Passport'>护照</MenuItem>
                 </Select>
               </FormControl>
-            </Grid>
-            <Grid
+            </Grid> */}
+            {/* <Grid
               item
               md={4}
               xs={12}
@@ -139,7 +139,7 @@ const ProfileDetails = ({ className, ...rest }) => {
                 value={values.cardNumber}
                 variant="outlined"
               />
-            </Grid>
+            </Grid> */}
             <Grid
               item
               md={4}
@@ -148,7 +148,7 @@ const ProfileDetails = ({ className, ...rest }) => {
               <TextField
                 fullWidth
                 required
-                label="手机号"
+                label="Phone Number"
                 name="phoneNumber"
                 onChange={handleChange}
                 value={values.phoneNumber}
@@ -163,14 +163,14 @@ const ProfileDetails = ({ className, ...rest }) => {
               <TextField
                 fullWidth
                 type="password"
-                label="密码"
+                label="Password"
                 name="password"
                 onChange={e => setPassword(e.target.value)}
                 value={password}
                 variant="outlined"
               />
             </Grid>
-            <Grid
+            {/* <Grid
               item
               md={12}
               xs={12}
@@ -184,7 +184,7 @@ const ProfileDetails = ({ className, ...rest }) => {
                 variant="outlined"
               >
               </TextField>
-            </Grid>
+            </Grid> */}
           </Grid>
         </CardContent>
         <Divider />
@@ -217,7 +217,7 @@ const ProfileDetails = ({ className, ...rest }) => {
                 })
             }}
           >
-            保存信息
+            Update Account Information
           </Button>
         </Box>
       </Card>

@@ -53,47 +53,47 @@ const OrderRequest = () => {
                 console.log(val);
                 const { data } = val;
                 setUserInfo({
-                    '用户姓名': data.userName,
-                    '用户ID': data.userId,
-                    '用户联系方式': data.phoneNumber,
-                    '用户介绍': data.introduction
+                    'Name': data.userName,
+                    'User ID': data.userId,
+                    'Contact Number': data.phoneNumber,
+                    'Account Information': data.introduction
                 });
                 setIsModalVisible(true);
             })
             .catch(err => {
                 console.log(err);
-                alert('查询失败，请重试！');
+                alert('Search失败，请重试！');
             })
     }
 
     const columns = [
         {
-            title: '请求ID',
+            title: 'Activity ID',
             dataIndex: 'requestId',
             key: 'requestId',
         },
         {
-            title: '请求用户ID',
+            title: 'Request Creator ID',
             dataIndex: 'userId',
             key: 'userId',
         },
         {
-            title: '请求状态',
+            title: 'Request Status',
             dataIndex: 'requestState',
             key: 'requestState',
         },
         {
-            title: '请求发起时间',
+            title: 'Request Creator Date',
             dataIndex: 'createDate',
             key: 'createDate',
         },
         {
-            title: '查看用户基本信息',
+            title: 'Check User Information',
             dataIndex: 'check',
             key: 'check',
             render: (text, record) => {
                 return (<Button color="primary" onClick={() => { handleCheck(record.userId) }}>
-                    查看令主信息
+                    Check Information
                 </Button>)
             }
         }
@@ -134,7 +134,7 @@ const OrderRequest = () => {
                         />
                     </Paper>
                 </Container>
-                <Modal title="令主信息" visible={isModalVisible} onOk={handleModal} onCancel={handleModal}>
+                <Modal title="Creator Information" visible={isModalVisible} onOk={handleModal} onCancel={handleModal}>
                     {
                         Object.keys(userInfo).map(key =>
                             (<p>{key}：{userInfo[key]}</p>)

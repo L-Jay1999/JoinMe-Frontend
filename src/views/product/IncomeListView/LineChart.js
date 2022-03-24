@@ -28,7 +28,7 @@ class LineChart extends Component {
         trigger: 'axis',
       },
       legend: {
-        data:['成交单数','中介费金额']
+        data: ['Number of transactions', 'Fee']
       },
       xAxis: {
         data: data.x,
@@ -49,7 +49,7 @@ class LineChart extends Component {
       },
       series: [
         {
-          name: '成交单数',
+          name: 'Number of transactions',
           type: 'line',
           data: data.y['number'],
           smooth: false,
@@ -63,16 +63,16 @@ class LineChart extends Component {
           }
         },
         {
-          name: '中介费金额',
+          name: 'Fee',
           type: 'bar',
           data: data.y['income'],
           barWidth: '15%',
         }
       ]
     }
-    setTimeout(()=>{
+    setTimeout(() => {
       myEcharts.setOption(option);
-    },500)
+    }, 500)
   }
   render() {
     return (

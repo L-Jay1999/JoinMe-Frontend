@@ -78,7 +78,7 @@ const AcceptOrderView = ({ className, ...rest }) => {
                 >
                   <TextField
                     fullWidth
-                    label="用户描述"
+                    label="User Introduction"
                     name="description"
                     onChange={handleChange}
                     value={values.description}
@@ -108,7 +108,7 @@ const AcceptOrderView = ({ className, ...rest }) => {
                         })
                     }}
                   >
-                    更新请求
+                    Update Request
                   </Button>
                 </Grid>
               </Grid>

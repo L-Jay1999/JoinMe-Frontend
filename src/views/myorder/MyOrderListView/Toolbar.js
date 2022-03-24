@@ -45,8 +45,8 @@ const Toolbar = ({ className, filterText, onFilterTextChange, ...rest }) => {
                     variant="contained"
                     onClick={() => { navigate('/app/issue', { replace: true }); }}
                 >
-                    添加召集令
-        </Button>
+                    Add activity
+                </Button>
             </Box>
             <Box mt={3}>
                 <Card>
@@ -66,7 +66,7 @@ const Toolbar = ({ className, filterText, onFilterTextChange, ...rest }) => {
                                         </InputAdornment>
                                     )
                                 }}
-                                placeholder="搜索召集令"
+                                placeholder="Search Activities"
                                 variant="outlined"
                                 onChange={handleFilterTextChange}
                             />

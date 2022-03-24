@@ -15,19 +15,19 @@ import {
 import Page from 'src/components/Page';
 
 const ordertypes = {
-  'Technology': "技术交流",
-  'Study': '学业探讨',
-  'SocialExperience': '社会实践',
-  'PublicBenefit': '公益志愿',
-  'Play': '游玩'
+  'Technology': "Technology",
+  'Study': 'Study',
+  'SocialExperience': 'Social Practice',
+  'PublicBenefit': 'Volunteer',
+  'Play': 'Play'
 }
 
 const orderstates = {
-  'Initial': "未完成",
-  'Respond': '未完成',
-  'Finish': '已完成',
-  'Cancel': '已取消',
-  'Due': '已过期'
+  'Initial': "Not Finished",
+  'Respond': 'Not Finished',
+  'Finish': 'Finished',
+  'Cancel': 'Cancelled',
+  'Due': 'Expired'
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -46,19 +46,19 @@ const OrderButton = (props) => {
 
   if (!props.permission)
     return (<Button variant="contained" disabled href="#contained-buttons" style={{ padding: 10 }} align="center">
-      您已发送接令请求
+      Wait for response
     </Button>);
   else if (props.same)
     return (<Button variant="contained" disabled href="#contained-buttons" style={{ padding: 10 }} align="center">
-      您是令主
+      You created this
     </Button>);
   else if (props.status === 'Respond' || props.status === 'Initial')
     return (<Button variant="contained" color="primary" href={temp} style={{ padding: 10 }} align="center">
-      我要接令
+      I want to join
     </Button>);
   else
     return (<Button variant="contained" disabled href="#" style={{ padding: 10 }} align="center">
-      我要接令
+      I want to join
     </Button>);
 
 }
@@ -131,7 +131,7 @@ const OrderDetailView = () => {
               style={{ padding: 30 }}
               titleTypographyProps={{ variant: 'h1' }}
               align="center"
-              title="召集令信息"
+              title="Activity Information"
             />
             <Grid container spacing={3}>
               <Grid
@@ -155,22 +155,22 @@ const OrderDetailView = () => {
               >
                 <CardContent style={{ padding: 40 }}>
                   <Typography gutterBottom variant="h3" component="h2" md={12} style={{ padding: 10 }}>
-                    召集令名称：{detail.orderName}
+                    Activity Name：{detail.orderName}
                   </Typography>
                   <Typography gutterBottom variant="h3" component="h2" md={12} style={{ padding: 10 }}>
-                    召集令描述：{detail.description}
+                    Activity Description：{detail.description}
                   </Typography>
                   <Typography gutterBottom variant="h3" component="h2" md={12} style={{ padding: 10 }}>
-                    召集令类型：{ordertypes[detail.orderType]}
+                    Activity Type：{ordertypes[detail.orderType]}
                   </Typography>
                   <Typography gutterBottom variant="h3" component="h2" md={12} style={{ padding: 10 }}>
-                    召集人数：{detail.number}
+                    Number of People：{detail.number}
                   </Typography>
                   <Typography gutterBottom variant="h3" component="h2" md={12} style={{ padding: 10 }}>
-                    结束时间：{detail.endDate}
+                    Due Time：{detail.endDate}
                   </Typography>
                   <Typography gutterBottom variant="h3" component="h2" md={12} style={{ padding: 10 }}>
-                    当前状态：{orderstates[detail.orderState]}
+                    Current Status：{orderstates[detail.orderState]}
                   </Typography>
                   <Typography gutterBottom variant="h3" component="h2" md={12} style={{ padding: 10 }}>
                     {<OrderButton status={detail.orderState} permission={permission} same={userId === detail.userId} id={id} />}

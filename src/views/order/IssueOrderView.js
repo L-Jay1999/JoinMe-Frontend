@@ -51,7 +51,7 @@ const IssueOrderView = ({ className, ...rest }) => {
   return (
     <Page
       className={classes.root}
-      title="发起召集令"
+      title="Issue Activity"
     >
       <Container maxWidth="lg">
         <Grid
@@ -66,7 +66,7 @@ const IssueOrderView = ({ className, ...rest }) => {
           >
             <Card>
               <CardHeader
-                title="发起召集令"
+                title="Issue Activity"
               />
               <Divider />
               <CardContent>
@@ -81,7 +81,7 @@ const IssueOrderView = ({ className, ...rest }) => {
                   >
                     <TextField
                       fullWidth
-                      label="召集令名称"
+                      label="Activity Name"
                       name="orderName"
                       onChange={handleChange}
                       required
@@ -97,7 +97,7 @@ const IssueOrderView = ({ className, ...rest }) => {
                   >
                     <TextField
                       fullWidth
-                      label="召集人数"
+                      label="Number of People"
                       name="number"
                       onChange={handleChange}
                       required
@@ -112,7 +112,7 @@ const IssueOrderView = ({ className, ...rest }) => {
                     xs={12}
                   >
                     <TextField
-                      label="结束时间"
+                      label="Due Time"
                       type="date"
                       name="endDate"
                       defaultValue="2017-05-24"
@@ -132,17 +132,17 @@ const IssueOrderView = ({ className, ...rest }) => {
                     xs={12}
                   >
                     <FormControl variant="outlined" fullWidth className={classes.formControl}>
-                      <InputLabel required id="demo-simple-select-outlined-label">召集令类型</InputLabel>
+                      <InputLabel required id="demo-simple-select-outlined-label">Activity Type</InputLabel>
                       <Select
-                        label="召集令类型"
+                        label="Activity Type"
                         name="orderType"
                         onChange={handleChange}
                         value={order.orderType}>
-                        <MenuItem value='Technology'>技术交流</MenuItem>
-                        <MenuItem value='Study'>学业探讨</MenuItem>
-                        <MenuItem value='SocialExperience'>社会实践</MenuItem>
-                        <MenuItem value='PublicBenefit'>公益志愿</MenuItem>
-                        <MenuItem value='Play'>游玩</MenuItem>
+                        <MenuItem value='Technology'>Technology</MenuItem>
+                        <MenuItem value='Study'>Study</MenuItem>
+                        <MenuItem value='SocialExperience'>Social Practice</MenuItem>
+                        <MenuItem value='PublicBenefit'>Volunteer</MenuItem>
+                        <MenuItem value='Play'>Play</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>
@@ -154,7 +154,7 @@ const IssueOrderView = ({ className, ...rest }) => {
                   >
                     <TextField
                       fullWidth
-                      label="召集令描述"
+                      label="Activity Description"
                       name="description"
                       onChange={handleChange}
                       value={order.description}
@@ -188,13 +188,13 @@ const IssueOrderView = ({ className, ...rest }) => {
                         if (data.code !== 10000)
                           alert('召集令提交失败');
                         else {
-                          alert('召集令提交成功')
+                          alert('Submit Activity Success')
                           navigate('/app/products', { replace: true });
                         }
                       })
                   }}
                 >
-                  提交召集令
+                  Submit Activity
                 </Button>
               </Box>
             </Card>

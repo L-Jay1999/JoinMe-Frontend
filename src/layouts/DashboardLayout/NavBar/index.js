@@ -25,22 +25,22 @@ const adminItems = [
   {
     href: '/app/details',
     icon: MapIcon,
-    title: '明细表',
+    title: 'Details',
   },
   {
     href: '/app/income',
     icon: ChartIcon,
-    title: '收益汇总表',
+    title: 'Income',
   },
   {
     href: '/app/userlist',
     icon: UserIcon,
-    title: '用户信息表',
+    title: 'User List',
   },
   {
     href: '/app/adminOrderRequest',
     icon: BookIcon,
-    title: '请求信息表',
+    title: 'Admin Order Request',
   },
 ];
 
@@ -48,22 +48,22 @@ const userItems = [
   {
     href: '/app/products',
     icon: ShoppingBagIcon,
-    title: '查看召集令'
+    title: 'Activities'
   },
   {
     href: '/app/myorders',
     icon: ShoppingBagIcon,
-    title: '查看我的召集令'
+    title: 'My Activities'
   },
   {
     href: '/app/myrequests',
     icon: ShoppingBagIcon,
-    title: '查看我的请求'
+    title: 'My Requests'
   },
   {
     href: '/app/account',
     icon: UserIcon,
-    title: '用户信息'
+    title: 'Account Information'
   },
 ];
 

@@ -29,31 +29,31 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ordertypes = {
-  'Technology': "技术交流",
-  'Study': '学业探讨',
-  'SocialExperience': '社会实践',
-  'PublicBenefit': '公益志愿',
-  'Play': '游玩'
+  'Technology': "Technology",
+  'Study': 'Study',
+  'SocialExperience': 'Social Practice',
+  'PublicBenefit': 'Volunteer',
+  'Play': 'Play'
 }
 
 const columns = [
-  { id: 'orderId', label: '召集令号' },
-  { id: 'orderType', label: '召集令类型' },
-  { id: 'orderName', label: '召集令名称' },
-  { id: 'number', label: '召集人数' },
-  { id: 'endDate', label: '结束时间' },
-  { id: 'orderState', label: '当前状态' }
+  { id: 'orderId', label: 'Activity Number' },
+  { id: 'orderType', label: 'Activity Type' },
+  { id: 'orderName', label: 'Activity Name' },
+  { id: 'number', label: 'Number of People' },
+  { id: 'endDate', label: 'Due Time' },
+  { id: 'orderState', label: 'Current Status' }
 ];
 
 const OrderState = (props) => {
   if (props.status === 'Respond' || props.status === 'Initial')
-    return (<Chip size="small" label="未完成" color="primary" />)
+    return (<Chip size="small" label="Not Finished" color="primary" />)
   else if (props.status === 'Finish')
-    return (<Chip size="small" label="已完成" color="secondary" />)
+    return (<Chip size="small" label="Finished" color="secondary" />)
   else if (props.status === 'Due')
-    return (<Chip size="small" label="已过期" />)
+    return (<Chip size="small" label="Expired" />)
   else
-    return (<Chip size="small" label="已取消" />)
+    return (<Chip size="small" label="Cancelled" />)
 }
 
 const ProductList = () => {

@@ -84,7 +84,7 @@ const AcceptOrderView = ({ className, ...rest }) => {
           >
             <Card>
               <CardHeader
-                title="召集令请求"
+                title="Activity Request"
               />
               <Divider />
               <CardContent>
@@ -100,7 +100,7 @@ const AcceptOrderView = ({ className, ...rest }) => {
                     <TextField
                       disabled
                       fullWidth
-                      label="召集令名称"
+                      label="Activity Name"
                       name="orderName"
                       onChange={handleOnChange}
                       required
@@ -116,7 +116,7 @@ const AcceptOrderView = ({ className, ...rest }) => {
                     <TextField
                       fullWidth
                       disabled
-                      label="召集人数"
+                      label="Number of People"
                       name="number"
                       onChange={handleOnChange}
 
@@ -132,7 +132,7 @@ const AcceptOrderView = ({ className, ...rest }) => {
                   >
                     <TextField
                       fullWidth
-                      label="用户描述"
+                      label="User Description"
                       name="description"
                       onChange={handleChange}
                       value={values.description}
@@ -166,13 +166,13 @@ const AcceptOrderView = ({ className, ...rest }) => {
                         if (data.code !== 10000)
                           alert('请求提交失败');
                         else {
-                          alert('请求提交成功')
+                          alert('Submit Request Success')
                           navigate('/app/products', { replace: true });
                         }
                       })
                   }}
                 >
-                  提交请求
+                  Submit Request
                 </Button>
               </Box>
             </Card>

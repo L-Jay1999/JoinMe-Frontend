@@ -30,22 +30,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const columns = [
-    { id: 'orderId', label: '召集令号' },
-    { id: 'description', label: '描述' },
-    { id: 'modifyDate', label: '修改时间' },
-    { id: 'requestState', label: '请求状态' },
-    { id: 'operation', label: '操作' }
+    { id: 'orderId', label: 'Activity Number' },
+    { id: 'description', label: 'Description' },
+    { id: 'modifyDate', label: 'Modified Time' },
+    { id: 'requestState', label: 'Request Status' },
+    { id: 'operation', label: 'Operation' }
 ];
 
 const RequestState = (props) => {
     if (props.status === 'Accept')
-        return (<Chip size="small" label="已完成" color="primary" />)
+        return (<Chip size="small" label="Finished" color="primary" />)
     else if (props.status === 'Refuse')
-        return (<Chip size="small" label="未通过" color="secondary" />)
+        return (<Chip size="small" label="Failed" color="secondary" />)
     else if (props.status === 'UnReady')
-        return (<Chip size="small" label="未开始" />)
+        return (<Chip size="small" label="Not Ready" />)
     else
-        return (<Chip size="small" label="已取消" />)
+        return (<Chip size="small" label="Cancelled" />)
 }
 
 const MyRequestList = () => {
@@ -128,7 +128,7 @@ const MyRequestList = () => {
                                                                 // window.location.href = '/app/orders/' + row.orderId;
                                                                 navigate('/app/orders/' + row.orderId, { replace: true });
                                                             }}>
-                                                                查看召集令
+                                                                Details
                                                             </Button>
                                                             <Button color='primary' variant="contained" key={row.requestId} onClick={
                                                                 () => {
@@ -138,7 +138,7 @@ const MyRequestList = () => {
                                                                         alert('不能改了')
                                                                 }
                                                             }>
-                                                                修改
+                                                                Modify
                                                             </Button>
                                                             <Button color="secondary" variant="contained" key={row.requestId} onClick={
                                                                 () => {
@@ -149,9 +149,9 @@ const MyRequestList = () => {
                                                                     ).then(res => res.json())
                                                                         .then(data => {
                                                                             if (data.code !== 10000)
-                                                                                alert('删除失败')
+                                                                                alert('Delete失败')
                                                                             else {
-                                                                                alert('删除成功')
+                                                                                alert('Delete成功')
                                                                                 fetch('http://localhost:8080/orderrequest/', {
                                                                                     method: 'get',
                                                                                     credentials: "include"
@@ -166,7 +166,7 @@ const MyRequestList = () => {
                                                                         })
                                                                 }
                                                             }>
-                                                                删除
+                                                                Delete
                                                             </Button>
                                                         </TableCell>
                                                     )

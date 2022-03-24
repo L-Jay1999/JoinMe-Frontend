@@ -30,23 +30,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const columns = [
-    { id: 'orderId', label: '召集令号' },
-    { id: 'userId', label: '用户Id' },
-    { id: 'description', label: '描述' },
-    { id: 'modifyDate', label: '修改时间' },
-    { id: 'requestState', label: '请求状态' },
-    { id: 'operation', label: '操作' }
+    { id: 'orderId', label: 'Activity Number' },
+    { id: 'userId', label: 'User ID' },
+    { id: 'description', label: 'Description' },
+    { id: 'modifyDate', label: 'Modified Time' },
+    { id: 'requestState', label: 'Request Status' },
+    { id: 'operation', label: 'Operation' }
 ];
 
 const RequestState = (props) => {
     if (props.status === 'Accept')
-        return (<Chip size="small" label="已完成" color="primary" />)
+        return (<Chip size="small" label="Finished" color="primary" />)
     else if (props.status === 'Refuse')
-        return (<Chip size="small" label="未通过" color="secondary" />)
+        return (<Chip size="small" label="Failed" color="secondary" />)
     else if (props.status === 'UnReady')
-        return (<Chip size="small" label="未开始" />)
+        return (<Chip size="small" label="Not Ready" />)
     else
-        return (<Chip size="small" label="已取消" />)
+        return (<Chip size="small" label="Cancelled" />)
 }
 
 const MyRequestList = () => {
@@ -142,9 +142,9 @@ const MyRequestList = () => {
                                                                     ).then(res => res.json())
                                                                         .then(data => {
                                                                             if (data.code !== 10000)
-                                                                                alert('同意失败')
+                                                                                alert('Accept失败')
                                                                             else {
-                                                                                alert('同意成功')
+                                                                                alert('Accept成功')
                                                                                 fetch('http://localhost:8080/orderrequest/orderid/' + id, {
                                                                                     method: 'get',
                                                                                     credentials: "include"
@@ -159,7 +159,7 @@ const MyRequestList = () => {
                                                                         })
                                                                 }
                                                             }>
-                                                                同意
+                                                                Accept
                                                             </Button>
                                                             <Button color="secondary" variant="contained" key={row.userId} onClick={
                                                                 () => {
@@ -170,9 +170,9 @@ const MyRequestList = () => {
                                                                     ).then(res => res.json())
                                                                         .then(data => {
                                                                             if (data.code !== 10000)
-                                                                                alert('拒绝失败')
+                                                                                alert('Reject失败')
                                                                             else {
-                                                                                alert('拒绝成功')
+                                                                                alert('Reject成功')
                                                                                 fetch('http://localhost:8080/orderrequest/orderid/' + id, {
                                                                                     method: 'get',
                                                                                     credentials: "include"
@@ -187,7 +187,7 @@ const MyRequestList = () => {
                                                                         })
                                                                 }
                                                             }>
-                                                                拒绝
+                                                                Reject
                                                             </Button>
                                                         </TableCell>
                                                     )

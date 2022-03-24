@@ -69,7 +69,7 @@ const OrderDetails = ({ className, ...rest }) => {
             {...rest}
         >
             <Card>
-                <CardHeader title="召集令信息" />
+                <CardHeader title="Activity Information" />
                 <Divider />
                 <CardContent>
                     <Grid container spacing={2}>
@@ -85,7 +85,7 @@ const OrderDetails = ({ className, ...rest }) => {
                             />
                             <form action={imageUploadUrl} method="post" enctype="multipart/form-data" id="imageUpload">
                                 <input type="file" id="uploadImage" name="file" />
-                                <input type="button" value="提交" onClick={
+                                <input type="button" value="Submit" onClick={
                                     () => {
                                         let uploadimage = document.getElementById("uploadImage")
                                         if (uploadimage.files.length == 0)
@@ -96,13 +96,13 @@ const OrderDetails = ({ className, ...rest }) => {
                                         }
                                     }
                                 } />
-                                <input type="reset" value="清空" />
+                                <input type="reset" value="Clear" />
                             </form>
                         </Grid>
                         <Grid item xs={12} sm container>
                             <Grid item xs container spacing={2}>
                                 <TextField
-                                    label="召集令id"
+                                    label="Activity ID"
                                     name="orderId"
                                     disabled
                                     onChange={handleChange}
@@ -110,28 +110,28 @@ const OrderDetails = ({ className, ...rest }) => {
                                     variant="outlined"
                                 />
                                 <FormControl variant="outlined" className={classes.formControl}>
-                                    <InputLabel required>召集令类型</InputLabel>
+                                    <InputLabel required>Activity Type</InputLabel>
                                     <Select
-                                        label="召集令类型"
+                                        label="Activity Type"
                                         name="orderType"
                                         onChange={handleChange}
                                         value={values.orderType}>
-                                        <MenuItem value='Technology'>科技交流</MenuItem>
-                                        <MenuItem value='Study'>我爱学习</MenuItem>
-                                        <MenuItem value='SocialExperience'>社会经验</MenuItem>
-                                        <MenuItem value='PublicBenefit'>人民福祉</MenuItem>
-                                        <MenuItem value='Play'>玩</MenuItem>
+                                        <MenuItem value='Technology'>Technology</MenuItem>
+                                        <MenuItem value='Study'>Study</MenuItem>
+                                        <MenuItem value='SocialExperience'>Social Practice</MenuItem>
+                                        <MenuItem value='PublicBenefit'>Volunteer</MenuItem>
+                                        <MenuItem value='Play'>Play</MenuItem>
                                     </Select>
                                 </FormControl>
                                 <TextField
-                                    label="召集令名字"
+                                    label="Activity Name"
                                     name="orderName"
                                     onChange={handleChange}
                                     value={values.orderName}
                                     variant="outlined"
                                 />
                                 <TextField
-                                    label="人数"
+                                    label="Number of People"
                                     name="number"
                                     onChange={handleChange}
                                     value={values.number}
@@ -139,7 +139,7 @@ const OrderDetails = ({ className, ...rest }) => {
                                 />
                                 <TextField
                                     fullWidth
-                                    label="描述"
+                                    label="Description"
                                     name="description"
                                     onChange={handleChange}
                                     value={values.description}
@@ -167,7 +167,7 @@ const OrderDetails = ({ className, ...rest }) => {
                                             })
                                     }}
                                 >
-                                    更新召集令
+                                    Update Activity
                                 </Button>
                             </Grid>
                         </Grid>

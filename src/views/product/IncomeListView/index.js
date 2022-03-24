@@ -33,31 +33,31 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const orderTypes = {
-  'Technology': "技术交流",
-  'Study': '学业探讨',
-  'SocialExperience': '社会实践',
-  'PublicBenefit': '公益志愿',
-  'Play': '游玩'
+  'Technology': "Technology",
+  'Study': 'Study',
+  'SocialExperience': 'Social Practice',
+  'PublicBenefit': 'Volunteer',
+  'Play': 'Play'
 }
 
 const columns = [
   {
-    title: '日期',
+    title: 'Date',
     dataIndex: 'date',
   },
   {
-    title: '召集类型',
+    title: 'Activity Type',
     dataIndex: 'orderType',
   },
   {
-    title: '中介费金额',
+    title: 'Fee',
     dataIndex: 'income',
     sorter: {
       compare: (a, b) => a.income - b.income
     }
   },
   {
-    title: '成交单数',
+    title: 'Number of transactions',
     dataIndex: 'number',
     sorter: {
       compare: (a, b) => a.number - b.number
@@ -190,7 +190,7 @@ const IncomeList = () => {
           >
             <TextField
               id="startDate"
-              label="请选择起始时间"
+              label="Start Date"
               type="date"
               defaultValue="2020-01-01"
               className={classes.textField}
@@ -201,7 +201,7 @@ const IncomeList = () => {
             />
             <TextField
               id="endDate"
-              label="请选择终止时间"
+              label="End Date"
               type="date"
               defaultValue={endDate}
               className={classes.textField}
@@ -210,8 +210,8 @@ const IncomeList = () => {
               }}
               onChange={handleDate}
             />
-            <FormControl variant="outlined" className={classes.formControl} >
-              <InputLabel>请选择城市</InputLabel>
+            {/* <FormControl variant="outlined" className={classes.formControl} >
+              <InputLabel>City</InputLabel>
               <Select
                 id="selectedCity"
                 value={selectedCity}
@@ -228,9 +228,9 @@ const IncomeList = () => {
                   })
                 }
               </Select>
-            </FormControl>
+            </FormControl> */}
             <FormControl variant="outlined" className={classes.formControl} error={!isType}>
-              <InputLabel>请选择信令类型</InputLabel>
+              <InputLabel>Activity Type</InputLabel>
               <Select
                 id="orderType"
                 value={orderType}
@@ -247,10 +247,10 @@ const IncomeList = () => {
                   })
                 }
               </Select>
-              {isType || <FormHelperText>需选择信令类型</FormHelperText>}
+              {isType || <FormHelperText>Need to choose one</FormHelperText>}
             </FormControl>
             <Button className={classes.Button} variant="contained" color="primary" onClick={handleClick}>
-              查询
+              Search
             </Button>
           </Box>
           <br />

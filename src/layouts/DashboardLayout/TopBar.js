@@ -28,13 +28,13 @@ const GenerateButton = ({ data, navigate }) => {
       <Hidden mdDown>
         <IconButton color="inherit" onClick={() => window.location.href = '/login'}>
           <Button variant="contained" color="primary" >
-            登录
+            Login
           </Button>
 
         </IconButton>
         <IconButton color="inherit" onClick={() => window.location.href = '/register'}>
           <Button variant="contained" color="primary" >
-            注册
+            Register
           </Button>
         </IconButton>
       </Hidden>
@@ -50,7 +50,7 @@ const GenerateButton = ({ data, navigate }) => {
               credentials: "include",
             }).then(window.location.href = '/app/products');
           }}>
-            退出
+            Exit
           </Button>
 
         </IconButton>

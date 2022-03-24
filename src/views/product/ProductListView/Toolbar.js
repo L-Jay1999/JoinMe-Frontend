@@ -43,9 +43,9 @@ const Toolbar = ({ className, filterText, onFilterTextChange, ...rest }) => {
         <Button
           color="primary"
           variant="contained"
-          onClick={() => { navigate('/app/issue', { replace: true });}}
+          onClick={() => { navigate('/app/issue', { replace: true }); }}
         >
-        添加召集令
+          Add activity
         </Button>
       </Box>
       <Box mt={3}>
@@ -66,7 +66,7 @@ const Toolbar = ({ className, filterText, onFilterTextChange, ...rest }) => {
                     </InputAdornment>
                   )
                 }}
-                placeholder="搜索召集令"
+                placeholder="Search Activity"
                 variant="outlined"
                 onChange={handleFilterTextChange}
               />
