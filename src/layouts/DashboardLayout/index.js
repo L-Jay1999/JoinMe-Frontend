@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
 import NavBar from './NavBar';
 import TopBar from './TopBar';
+import { baseIP } from 'src/ipconfig';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,7 +41,7 @@ const DashboardLayout = () => {
   const [userProfile, setUserProfile] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/user/', {
+    fetch('http://' + baseIP + ':8080/user/', {
       method: 'get',
       credentials: "include",
     }).then(res => res.json())

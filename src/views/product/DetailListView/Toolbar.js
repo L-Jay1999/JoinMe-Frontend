@@ -12,6 +12,7 @@ import {
   InputLabel,
   Button
 } from '@material-ui/core';
+import { baseIP } from 'src/ipconfig';
 
 import cityData from '../city.json';
 
@@ -71,7 +72,7 @@ const Toolbar = ({ className, filterText, onFilterTextChange, ...rest }) => {
     }
     else {
       alert(selectedCity, orderType);
-      fetch('http://localhost:8080/admin/detail',
+      fetch('http://' + baseIP + ':8080/admin/detail',
         {
           method: "POST",
           body: JSON.stringify({

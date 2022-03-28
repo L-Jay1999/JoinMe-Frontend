@@ -15,6 +15,7 @@ import {
 } from '@material-ui/core';
 import Page from 'src/components/Page';
 import Toolbar from './Toolbar';
+import { baseIP } from 'src/ipconfig';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,8 +66,8 @@ const ProductList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:8080/order/', {
-      method: 'get'
+    fetch('http://' + baseIP + ':8080/order/', {
+      method: 'get',
     }).then(res => res.json())
       .then(data => { setOrder(data.data); });
   }, []);

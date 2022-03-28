@@ -16,6 +16,7 @@ import Page from 'src/components/Page';
 import { Table, Modal } from 'antd';
 import 'antd/dist/antd.css';
 import cityData from '../city.json';
+import { baseIP } from 'src/ipconfig';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,7 +70,7 @@ const DetailList = () => {
   }
 
   const handleCheck = (id) => {
-    fetch('http://localhost:8080/admin/user/' + id, { method: 'GET', credentials: "include" })
+    fetch('http://' + baseIP + ':8080/admin/user/' + id, { method: 'GET', credentials: "include" })
       .then(res => res.json())
       .then(val => {
         console.log(val);
@@ -160,7 +161,7 @@ const DetailList = () => {
     }
     else {
       console.log(orderType);
-      fetch('http://localhost:8080/admin/detail',
+      fetch('http://' + baseIP + ':8080/admin/detail',
         {
           method: "POST",
           credentials: "include",

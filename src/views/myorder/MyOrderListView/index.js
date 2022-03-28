@@ -16,6 +16,7 @@ import {
 } from '@material-ui/core';
 import Page from 'src/components/Page';
 import Toolbar from './Toolbar';
+import { baseIP } from 'src/ipconfig';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -67,7 +68,7 @@ const ProductList = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://localhost:8080/order/issued', {
+        fetch('http://' + baseIP + ':8080/order/issued', {
             method: 'get',
             credentials: "include"
         }).then(res => res.json())
@@ -157,7 +158,7 @@ const ProductList = () => {
                                                                 Requests
                                                             </Button>
                                                             <Button variant="contained" color="secondary" key={row.orderId} onClick={() => {
-                                                                fetch('http://localhost:8080/order/' + row.orderId, {
+                                                                fetch('http://' + baseIP + ':8080/order/' + row.orderId, {
                                                                     method: 'delete',
                                                                     credentials: "include",
                                                                 }
@@ -167,7 +168,7 @@ const ProductList = () => {
                                                                             alert('删除失败')
                                                                         else {
                                                                             alert('删除成功')
-                                                                            fetch('http://localhost:8080/order/issued', {
+                                                                            fetch('http://' + baseIP + ':8080/order/issued', {
                                                                                 method: 'get',
                                                                                 credentials: "include"
                                                                             }).then(res => res.json())

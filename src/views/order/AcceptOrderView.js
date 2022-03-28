@@ -15,6 +15,7 @@ import {
   Divider,
 } from '@material-ui/core';
 import Page from 'src/components/Page';
+import { baseIP } from 'src/ipconfig';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,7 +39,7 @@ const AcceptOrderView = ({ className, ...rest }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:8080/order/' + id, {
+    fetch('http://' + baseIP + ':8080/order/' + id, {
       method: 'get',
       credentials: "include",
     }).then(res => res.json())
@@ -152,7 +153,7 @@ const AcceptOrderView = ({ className, ...rest }) => {
                   color="primary"
                   variant="contained"
                   onClick={() => {
-                    fetch('http://localhost:8080/order/' + id + '/request', {
+                    fetch('http://' + baseIP + ':8080/order/' + id + '/request', {
                       method: 'post',
                       credentials: "include",
                       body: JSON.stringify(values),

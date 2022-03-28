@@ -16,6 +16,7 @@ import {
 } from '@material-ui/core';
 import Page from 'src/components/Page';
 import Toolbar from './Toolbar';
+import { baseIP } from 'src/ipconfig';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -57,7 +58,7 @@ const MyRequestList = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://localhost:8080/orderrequest/', {
+        fetch('http://' + baseIP + ':8080/orderrequest/', {
             method: 'get',
             credentials: "include"
         }).then(res => res.json())
@@ -142,7 +143,7 @@ const MyRequestList = () => {
                                                             </Button>
                                                             <Button color="secondary" variant="contained" key={row.requestId} onClick={
                                                                 () => {
-                                                                    fetch('http://localhost:8080/orderrequest/' + row.requestId, {
+                                                                    fetch('http://' + baseIP + ':8080/orderrequest/' + row.requestId, {
                                                                         method: 'delete',
                                                                         credentials: "include",
                                                                     }
@@ -152,7 +153,7 @@ const MyRequestList = () => {
                                                                                 alert('Delete失败')
                                                                             else {
                                                                                 alert('Delete成功')
-                                                                                fetch('http://localhost:8080/orderrequest/', {
+                                                                                fetch('http://' + baseIP + ':8080/orderrequest/', {
                                                                                     method: 'get',
                                                                                     credentials: "include"
                                                                                 }).then(res => res.json())

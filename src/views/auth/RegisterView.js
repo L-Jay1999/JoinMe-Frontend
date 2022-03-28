@@ -17,6 +17,7 @@ import {
   InputLabel,
 } from '@material-ui/core';
 import Page from 'src/components/Page';
+import { baseIP } from 'src/ipconfig';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,7 +80,7 @@ const RegisterView = () => {
               values.cardType = 'Identity';
               // values.cardType = values.cardType === '身份证' ? 'Identity' : 'Passport';
               // console.log(values);
-              fetch('http://localhost:8080/user/create', {
+              fetch('http://' + baseIP + ':8080/user/create', {
                 method: 'post',
                 credentials: "include",
                 body: JSON.stringify(values),

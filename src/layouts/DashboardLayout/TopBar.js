@@ -13,6 +13,7 @@ import {
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import Logo from 'src/components/Logo';
+import { baseIP } from 'src/ipconfig';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -45,7 +46,7 @@ const GenerateButton = ({ data, navigate }) => {
       <Hidden mdDown>
         <IconButton color="inherit">
           <Button variant="contained" color="primary" onClick={() => {
-            fetch('http://localhost:8080/logout', {
+            fetch('http://' + baseIP + ':8080/logout', {
               method: 'post',
               credentials: "include",
             }).then(window.location.href = '/app/products');
@@ -67,7 +68,7 @@ const TopBar = ({
   const classes = useStyles();
   // const [notifications] = useState([]);
   const navigate = useNavigate();
-  console.log(data);
+  // console.log(data);
 
   // let i = data.data !== 10000;
   return (

@@ -17,6 +17,7 @@ import {
     MenuItem,
     FormControl
 } from '@material-ui/core';
+import { baseIP } from 'src/ipconfig';
 
 const useStyles = makeStyles(() => ({
     root: {}
@@ -34,10 +35,10 @@ const OrderDetails = ({ className, ...rest }) => {
         'number': '',
     });
     const [imageUrl, setUrl] = useState("");
-    const imageUploadUrl = 'http://localhost:8080/order/' + id + '/upload'
+    const imageUploadUrl = 'http://' + baseIP + ':8080/order/' + id + '/upload'
 
     useEffect(() => {
-        fetch('http://localhost:8080/order/' + id, {
+        fetch('http://' + baseIP + ':8080/order/' + id, {
             method: 'get',
             credentials: "include",
         }).then(res => res.json())
@@ -149,7 +150,7 @@ const OrderDetails = ({ className, ...rest }) => {
                                     color="primary"
                                     variant="contained"
                                     onClick={() => {
-                                        fetch('http://localhost:8080/order/' + id, {
+                                        fetch('http://' + baseIP + ':8080/order/' + id, {
                                             method: 'post',
                                             credentials: "include",
                                             body: JSON.stringify(values),

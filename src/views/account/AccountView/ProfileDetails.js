@@ -17,6 +17,7 @@ import {
   MenuItem,
   FormControl
 } from '@material-ui/core';
+import { baseIP } from 'src/ipconfig';
 
 const useStyles = makeStyles(() => ({
   root: {}
@@ -37,7 +38,7 @@ const ProfileDetails = ({ className, ...rest }) => {
   const [password, setPassword] = useState('')
 
   useEffect(() => {
-    fetch('http://localhost:8080/user/', {
+    fetch('http://' + baseIP + ':8080/user/', {
       method: 'get',
       credentials: "include",
     }).then(res => res.json())
@@ -198,7 +199,7 @@ const ProfileDetails = ({ className, ...rest }) => {
             variant="contained"
             onClick={() => {
               values['password'] = password;
-              fetch('http://localhost:8080/user/', {
+              fetch('http://' + baseIP + ':8080/user/', {
 
                 method: 'post',
                 credentials: "include",

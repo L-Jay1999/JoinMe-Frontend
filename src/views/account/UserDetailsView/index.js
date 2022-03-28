@@ -15,6 +15,7 @@ import {
 } from '@material-ui/core';
 import Page from 'src/components/Page';
 import Toolbar from './Toolbar';
+import { baseIP } from 'src/ipconfig';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,7 +49,7 @@ const UserTable = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:8080/admin/user', {
+    fetch('http://' + baseIP + ':8080/admin/user', {
       method: 'get',
       credentials: 'include'
     }).then(res => res.json())

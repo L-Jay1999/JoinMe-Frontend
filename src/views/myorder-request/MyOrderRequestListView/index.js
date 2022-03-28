@@ -16,6 +16,7 @@ import {
 } from '@material-ui/core';
 import Page from 'src/components/Page';
 import Toolbar from './Toolbar';
+import { baseIP } from 'src/ipconfig';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -59,7 +60,7 @@ const MyRequestList = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://localhost:8080/orderrequest/orderid/' + id, {
+        fetch('http://' + baseIP + ':8080/orderrequest/orderid/' + id, {
             method: 'get',
             credentials: "include"
         }).then(res => res.json())
@@ -135,7 +136,7 @@ const MyRequestList = () => {
                                                             </Button>
                                                             <Button color="primary" variant="contained" key={row.userId} onClick={
                                                                 () => {
-                                                                    fetch('http://localhost:8080/orderrequest/' + row.requestId + '/approve', {
+                                                                    fetch('http://' + baseIP + ':8080/orderrequest/' + row.requestId + '/approve', {
                                                                         method: 'post',
                                                                         credentials: "include",
                                                                     }
@@ -145,7 +146,7 @@ const MyRequestList = () => {
                                                                                 alert('Accept失败')
                                                                             else {
                                                                                 alert('Accept成功')
-                                                                                fetch('http://localhost:8080/orderrequest/orderid/' + id, {
+                                                                                fetch('http://' + baseIP + ':8080/orderrequest/orderid/' + id, {
                                                                                     method: 'get',
                                                                                     credentials: "include"
                                                                                 }).then(res => res.json())
@@ -163,7 +164,7 @@ const MyRequestList = () => {
                                                             </Button>
                                                             <Button color="secondary" variant="contained" key={row.userId} onClick={
                                                                 () => {
-                                                                    fetch('http://localhost:8080/orderrequest/' + row.requestId + '/deny', {
+                                                                    fetch('http://' + baseIP + ':8080/orderrequest/' + row.requestId + '/deny', {
                                                                         method: 'post',
                                                                         credentials: "include",
                                                                     }
@@ -173,7 +174,7 @@ const MyRequestList = () => {
                                                                                 alert('Reject失败')
                                                                             else {
                                                                                 alert('Reject成功')
-                                                                                fetch('http://localhost:8080/orderrequest/orderid/' + id, {
+                                                                                fetch('http://' + baseIP + ':8080/orderrequest/orderid/' + id, {
                                                                                     method: 'get',
                                                                                     credentials: "include"
                                                                                 }).then(res => res.json())

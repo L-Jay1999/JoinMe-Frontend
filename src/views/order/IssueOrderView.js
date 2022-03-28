@@ -20,6 +20,7 @@ import {
   FormControl
 } from '@material-ui/core';
 import Page from 'src/components/Page';
+import { baseIP } from 'src/ipconfig';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -174,7 +175,7 @@ const IssueOrderView = ({ className, ...rest }) => {
                   color="primary"
                   variant="contained"
                   onClick={() => {
-                    fetch('http://localhost:8080/order/issue', {
+                    fetch('http://' + baseIP + ':8080/order/issue', {
                       method: 'post',
                       credentials: "include",
                       body: JSON.stringify(order),

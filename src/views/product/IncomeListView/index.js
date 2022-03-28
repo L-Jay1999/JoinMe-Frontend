@@ -17,6 +17,8 @@ import LineChart from './LineChart';
 import cityData from '../city.json';
 import { Table } from 'antd';
 import 'antd/dist/antd.css';
+import { baseIP } from 'src/ipconfig';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.dark,
@@ -130,7 +132,7 @@ const IncomeList = () => {
       console.log(endDate)
       console.log(selectedCity)
       console.log(orderType)
-      fetch('http://localhost:8080/admin/income',
+      fetch('http://' + baseIP + ':8080/admin/income',
         {
           method: "POST",
           credentials: "include",

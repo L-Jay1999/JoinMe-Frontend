@@ -1,0 +1,1 @@
+export const baseIP = '13.250.46.133'

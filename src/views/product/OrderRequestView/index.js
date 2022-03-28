@@ -8,6 +8,7 @@ import {
 import Page from 'src/components/Page';
 import { Table, Modal } from 'antd';
 import 'antd/dist/antd.css';
+import { baseIP } from 'src/ipconfig';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -47,7 +48,7 @@ const OrderRequest = () => {
     }
 
     const handleCheck = (id) => {
-        fetch('http://localhost:8080/admin/user/' + id, { method: 'GET', credentials: "include" })
+        fetch('http://' + baseIP + ':8080/admin/user/' + id, { method: 'GET', credentials: "include" })
             .then(res => res.json())
             .then(val => {
                 console.log(val);
@@ -100,7 +101,7 @@ const OrderRequest = () => {
     ]
 
     useEffect(() => {
-        fetch('http://localhost:8080/admin/orderrequest', { method: "GET", credentials: "include" })
+        fetch('http://' + baseIP + ':8080/admin/orderrequest', { method: "GET", credentials: "include" })
             .then(res => res.json())
             .then(val => {
                 console.log(val);

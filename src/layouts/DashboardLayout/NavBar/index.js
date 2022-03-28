@@ -114,7 +114,7 @@ const Items = ({ user }) => {
 const NavBar = ({ onMobileClose, openMobile, user }) => {
   const classes = useStyles();
   const location = useLocation();
-  console.log(user.userName);
+  // console.log(user.userName);
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
@@ -123,7 +123,7 @@ const NavBar = ({ onMobileClose, openMobile, user }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
-  console.log(user);
+  // console.log(user);
   return (
     <>
       <Hidden lgUp>

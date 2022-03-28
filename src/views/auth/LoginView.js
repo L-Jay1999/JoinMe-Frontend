@@ -12,6 +12,7 @@ import {
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
+import { baseIP } from 'src/ipconfig';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,7 +53,7 @@ const LoginView = () => {
               console.log(values.username);
               formData.append('username', values.username);
               formData.append('password', values.password);
-              fetch('http://localhost:8080/login', {
+              fetch('http://' + baseIP + ':8080/login', {
                 method: 'post',
                 body: formData,
                 credentials: "include",
